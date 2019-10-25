@@ -1,0 +1,6 @@
+pt-BR:
+  error_messages:
+    customer_not_found:
+      code: 20101
+      title: "Cliente não encontrado"
+      detail: "Esse cliente não existe, ou foi deletado."

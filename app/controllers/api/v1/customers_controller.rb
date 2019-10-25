@@ -1,51 +1,49 @@
-class Api::V1::CustomersController < ApplicationController
-  before_action :set_customer, only: [:show, :update, :destroy]
+class Api::V1::CustomersController < ApplicationController  
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    render_json_error :not_found, :customer_not_found
+  end
 
   def index
-    @customers = Customer.all
-    render json: @customers
+    customers = Customer.all
+    render json: customers, status: :created
   end
 
-  # GET /customers/1
-  # GET /customers/1.json
   def show
+    customer = set_customer
+    render json: customer, status: :ok
   end
 
-  # POST /customers
-  # POST /customers.json
   def create
-    @customer = Customer.new(customer_params)
+    customer = Customer.new(customer_params)
 
-    if @customer.save
-      render json: @customer, status: :created
+    if customer.save
+      render json: customer, status: :created
     else
-      render json: @customer.errors, status: :unprocessable_entity
+      render json: customer.errors, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /customers/1
-  # PATCH/PUT /customers/1.json
   def update
-    if @customer.update(customer_params)
-      render :show, status: :ok, location: @customer
+    customer = set_customer
+
+    if customer.update(customer_params)
+      render json:customer, status: :ok
     else
-      render json: @customer.errors, status: :unprocessable_entity
+      render json: customer.errors, status: :unprocessable_entity
     end
   end
 
-  # DELETE /customers/1
-  # DELETE /customers/1.json
   def destroy
-    @customer.destroy
+    customer = set_customer
+    customer.destroy
+    render json: '', status: :no_content
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_customer
-      @customer = Customer.find(params[:id])
+      Customer.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
       params.require(:customer).permit(:name, :last_name, :cpf, :phone, :email)
     end
