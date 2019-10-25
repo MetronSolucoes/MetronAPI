@@ -1,0 +1,8 @@
+pt-BR:
+  activerecord:
+    errors:
+      models:
+        service:
+          attributes:
+            name:
+              taken: 'Nome desse serviço já existente.'

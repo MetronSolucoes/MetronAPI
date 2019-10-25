@@ -7,9 +7,14 @@ pt-BR:
             phone:
               taken: 'Telefone já cadastrado.'
               too_long: 'Telefone muito longo(deve ter no máximo 20 caracteres).'
+              too_short: 'Telefone muito curto(deve ter no minímo 8 caracteres).'
             email:
               invalid: 'Email inválido.'
               taken: 'Email já cadastrado.'
             cpf:
               invalid: 'CPF inválido.'
               taken: 'CPF já cadastrado.'
+            name:
+              blank: 'Nome está em branco.'
+            last_name:
+              blank: 'Sobrenome está em branco.'

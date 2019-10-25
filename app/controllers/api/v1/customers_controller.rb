@@ -19,7 +19,7 @@ class Api::V1::CustomersController < ApplicationController
     if customer.save
       render json: customer, status: :created
     else
-      render json: customer.errors, status: :unprocessable_entity
+      render json: { message: 'Falha ao criar cliente', errors: customer.errors }, status: :unprocessable_entity
     end
   end
 
@@ -29,7 +29,7 @@ class Api::V1::CustomersController < ApplicationController
     if customer.update(customer_params)
       render json:customer, status: :ok
     else
-      render json: customer.errors, status: :unprocessable_entity
+      render json: { message: 'Falha ao atualizar serviço', errors: customer.errors }, status: :unprocessable_entity
     end
   end
 

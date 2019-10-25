@@ -1,7 +1,8 @@
 require 'cpf_cnpj'
 
 class Customer < ApplicationRecord
-  validates_length_of :phone, maximum: 20
+  validates_presence_of :name, :last_name
+  validates_length_of :phone, minimum: 8, maximum: 20, allow_blank: false
   validate :cpf_valid?
   validates_format_of :email, with: URI::MailTo::EMAIL_REGEXP
   validates_uniqueness_of :phone, :cpf, :email
