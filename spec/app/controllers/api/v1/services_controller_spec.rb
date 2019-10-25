@@ -128,8 +128,46 @@ RSpec.describe Api::V1::ServicesController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
+    let!(:service) { create(:service) }
 
     context 'when service deleted with sucess' do
+
+      it 'returns 200 status code and success message' do
+        delete :destroy, params: { id: service.id }
+
+        body = JSON.parse(@response.body)
+
+        expect(@response.status).to eq(200)
+        expect(body['message']).to eq('Serviço deletado com sucesso')
+      end
+    end
+
+    context 'when service not found' do
+
+      it 'returns status code 404 and not found message' do
+        delete :destroy, params: { id: 'xpto' }
+
+        body = JSON.parse(@response.body)
+
+        expect(@response.status).to eq(404)
+        expect(body['message']).to eq('Serviço não encontrado')
+      end
+    end
+
+    context 'when delete fails' do
+
+      before do
+        allow_any_instance_of(Service).to receive(:destroy).and_return(false)
+      end
+
+      it 'returns 422 status code and fails message' do
+        delete :destroy, params: { id: service.id }
+
+        body = JSON.parse(@response.body)
+
+        expect(@response.status).to eq(422)
+        expect(body['message']).to eq('Falha ao deletar serviço')
+      end
     end
   end
 end

@@ -47,10 +47,14 @@ class Api::V1::ServicesController < ApplicationController
   # DELETE /services/1
   # DELETE /services/1.json
   def destroy
-    @service.destroy
-    respond_to do |format|
-      format.html { redirect_to services_url, notice: 'Service was successfully destroyed.' }
-      format.json { head :no_content }
+    if @service.present?
+      if @service.destroy
+        render json: { message: 'Serviço deletado com sucesso' }, status: :ok
+      else
+        render json: { message: 'Falha ao deletar serviço'}, status: :unprocessable_entity
+      end
+    else
+      render json: { message: 'Serviço não encontrado' }, status: :not_found
     end
   end
 

@@ -510,3 +510,228 @@ Processing by Api::V1::ServicesController#update as HTML
   Parameters: {"id"=>"5684565"}
   [1m[36mService Load (0.5ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 5684565], ["LIMIT", 1]]
 Completed 404 Not Found in 2ms (Views: 0.2ms | ActiveRecord: 0.5ms)
+Processing by Api::V1::ServicesController#create as HTML
+  Parameters: {"service"=>{"description"=>"Com Tesoura", "duration"=>"1", "name"=>"Corte de Cabelo"}}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.4ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Com Tesoura"], ["duration", 1], ["created_at", "2019-10-25 21:32:46.064443"], ["updated_at", "2019-10-25 21:32:46.064443"]]
+  [1m[35m (33.7ms)[0m  [1m[35mCOMMIT[0m
+Completed 201 Created in 55ms (Views: 0.6ms | ActiveRecord: 38.8ms)
+Processing by Api::V1::ServicesController#create as HTML
+  Parameters: {"service"=>{"name"=>""}}
+Completed 422 Unprocessable Entity in 2ms (Views: 0.3ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.3ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:32:46.121230"], ["updated_at", "2019-10-25 21:32:46.121230"]]
+  [1m[35m (3.4ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#show as HTML
+  Parameters: {"id"=>"47"}
+  [1m[36mService Load (0.3ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 47], ["LIMIT", 1]]
+Completed 200 OK in 5ms (Views: 0.4ms | ActiveRecord: 0.5ms)
+Processing by Api::V1::ServicesController#show as HTML
+  Parameters: {"id"=>"xpto"}
+  [1m[36mService Load (0.2ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 1ms (Views: 0.2ms | ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.3ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:32:46.138206"], ["updated_at", "2019-10-25 21:32:46.138206"]]
+  [1m[35m (8.8ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#index as HTML
+  [1m[36mService Load (0.4ms)[0m  [1m[34mSELECT "services".* FROM "services"[0m
+Completed 200 OK in 8ms (Views: 7.3ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.4ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:32:46.160196"], ["updated_at", "2019-10-25 21:32:46.160196"]]
+  [1m[35m (8.1ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#update as HTML
+  Parameters: {"service"=>{"description"=>"Com shampoo cheiroso", "name"=>"Lavagem de cabelo"}, "id"=>"49"}
+  [1m[36mService Load (0.3ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 49], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Update (0.4ms)[0m  [1m[33mUPDATE "services" SET "name" = $1, "description" = $2, "updated_at" = $3 WHERE "services"."id" = $4[0m  [["name", "Lavagem de cabelo"], ["description", "Com shampoo cheiroso"], ["updated_at", "2019-10-25 21:32:46.173028"], ["id", 49]]
+  [1m[35m (5.3ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 11ms (Views: 0.9ms | ActiveRecord: 6.1ms)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.3ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:32:46.184385"], ["updated_at", "2019-10-25 21:32:46.184385"]]
+  [1m[35m (6.1ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#update as HTML
+  Parameters: {"service"=>{"description"=>"Com shampoo cheiroso", "name"=>"Lavagem de cabelo"}, "id"=>"50"}
+  [1m[36mService Load (0.3ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 50], ["LIMIT", 1]]
+Completed 422 Unprocessable Entity in 2ms (Views: 0.2ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.3ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:32:46.199383"], ["updated_at", "2019-10-25 21:32:46.199383"]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#update as HTML
+  Parameters: {"id"=>"5684565"}
+  [1m[36mService Load (0.3ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 5684565], ["LIMIT", 1]]
+Completed 404 Not Found in 1ms (Views: 0.2ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.3ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:32:46.207304"], ["updated_at", "2019-10-25 21:32:46.207304"]]
+  [1m[35m (4.4ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#destroy as HTML
+  Parameters: {"id"=>"52"}
+  [1m[36mService Load (0.3ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 52], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Destroy (0.3ms)[0m  [1m[31mDELETE FROM "services" WHERE "services"."id" = $1[0m  [["id", 52]]
+  [1m[35m (7.2ms)[0m  [1m[35mCOMMIT[0m
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 7.9ms)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.4ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:32:46.237597"], ["updated_at", "2019-10-25 21:32:46.237597"]]
+  [1m[35m (8.3ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#destroy as HTML
+  Parameters: {"id"=>"xpto"}
+  [1m[36mService Load (0.2ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.2ms)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.3ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:32:46.252276"], ["updated_at", "2019-10-25 21:32:46.252276"]]
+  [1m[35m (5.1ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#destroy as HTML
+  Parameters: {"id"=>"54"}
+  [1m[36mService Load (0.3ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 54], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Destroy (0.3ms)[0m  [1m[31mDELETE FROM "services" WHERE "services"."id" = $1[0m  [["id", 54]]
+  [1m[35m (5.7ms)[0m  [1m[35mCOMMIT[0m
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 6.4ms)
+Processing by Api::V1::ServicesController#create as HTML
+  Parameters: {"service"=>{"description"=>"Com Tesoura", "duration"=>"1", "name"=>"Corte de Cabelo"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.7ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Com Tesoura"], ["duration", 1], ["created_at", "2019-10-25 21:35:57.057836"], ["updated_at", "2019-10-25 21:35:57.057836"]]
+  [1m[35m (26.1ms)[0m  [1m[35mCOMMIT[0m
+Completed 201 Created in 48ms (Views: 0.9ms | ActiveRecord: 31.5ms)
+Processing by Api::V1::ServicesController#create as HTML
+  Parameters: {"service"=>{"name"=>""}}
+Completed 422 Unprocessable Entity in 3ms (Views: 0.4ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.3ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:35:57.118588"], ["updated_at", "2019-10-25 21:35:57.118588"]]
+  [1m[35m (5.1ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#show as HTML
+  Parameters: {"id"=>"56"}
+  [1m[36mService Load (0.4ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 56], ["LIMIT", 1]]
+Completed 200 OK in 5ms (Views: 0.6ms | ActiveRecord: 0.6ms)
+Processing by Api::V1::ServicesController#show as HTML
+  Parameters: {"id"=>"xpto"}
+  [1m[36mService Load (0.7ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 3ms (Views: 0.2ms | ActiveRecord: 0.7ms)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.3ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:35:57.138637"], ["updated_at", "2019-10-25 21:35:57.138637"]]
+  [1m[35m (7.5ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#index as HTML
+  [1m[36mService Load (0.3ms)[0m  [1m[34mSELECT "services".* FROM "services"[0m
+Completed 200 OK in 11ms (Views: 9.4ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.4ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:35:57.163576"], ["updated_at", "2019-10-25 21:35:57.163576"]]
+  [1m[35m (4.2ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#update as HTML
+  Parameters: {"service"=>{"description"=>"Com shampoo cheiroso", "name"=>"Lavagem de cabelo"}, "id"=>"58"}
+  [1m[36mService Load (0.2ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 58], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Update (0.3ms)[0m  [1m[33mUPDATE "services" SET "name" = $1, "description" = $2, "updated_at" = $3 WHERE "services"."id" = $4[0m  [["name", "Lavagem de cabelo"], ["description", "Com shampoo cheiroso"], ["updated_at", "2019-10-25 21:35:57.172453"], ["id", 58]]
+  [1m[35m (7.0ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 10ms (Views: 0.5ms | ActiveRecord: 7.6ms)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.5ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:35:57.183399"], ["updated_at", "2019-10-25 21:35:57.183399"]]
+  [1m[35m (6.8ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#update as HTML
+  Parameters: {"service"=>{"description"=>"Com shampoo cheiroso", "name"=>"Lavagem de cabelo"}, "id"=>"59"}
+  [1m[36mService Load (0.3ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 59], ["LIMIT", 1]]
+Completed 422 Unprocessable Entity in 2ms (Views: 0.3ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.3ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:35:57.201049"], ["updated_at", "2019-10-25 21:35:57.201049"]]
+  [1m[35m (10.5ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#update as HTML
+  Parameters: {"id"=>"5684565"}
+  [1m[36mService Load (0.4ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 5684565], ["LIMIT", 1]]
+Completed 404 Not Found in 2ms (Views: 0.3ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.3ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:35:57.218850"], ["updated_at", "2019-10-25 21:35:57.218850"]]
+  [1m[35m (5.0ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#destroy as HTML
+  Parameters: {"id"=>"61"}
+  [1m[36mService Load (0.3ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 61], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Destroy (0.3ms)[0m  [1m[31mDELETE FROM "services" WHERE "services"."id" = $1[0m  [["id", 61]]
+  [1m[35m (6.8ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 11ms (Views: 0.2ms | ActiveRecord: 7.8ms)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.3ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:35:57.238733"], ["updated_at", "2019-10-25 21:35:57.238733"]]
+  [1m[35m (7.5ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#destroy as HTML
+  Parameters: {"id"=>"xpto"}
+  [1m[36mService Load (0.4ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 2ms (Views: 0.5ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.4ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:35:57.270180"], ["updated_at", "2019-10-25 21:35:57.270180"]]
+  [1m[35m (8.9ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#destroy as HTML
+  Parameters: {"id"=>"63"}
+  [1m[36mService Load (0.2ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 63], ["LIMIT", 1]]
+Completed 422 Unprocessable Entity in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms)
+Processing by Api::V1::ServicesController#create as HTML
+  Parameters: {"service"=>{"description"=>"Com Tesoura", "duration"=>"1", "name"=>"Corte de Cabelo"}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.4ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Com Tesoura"], ["duration", 1], ["created_at", "2019-10-25 21:36:18.033216"], ["updated_at", "2019-10-25 21:36:18.033216"]]
+  [1m[35m (26.9ms)[0m  [1m[35mCOMMIT[0m
+Completed 201 Created in 48ms (Views: 0.5ms | ActiveRecord: 31.9ms)
+Processing by Api::V1::ServicesController#create as HTML
+  Parameters: {"service"=>{"name"=>""}}
+Completed 422 Unprocessable Entity in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.3ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:36:18.082496"], ["updated_at", "2019-10-25 21:36:18.082496"]]
+  [1m[35m (5.4ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#show as HTML
+  Parameters: {"id"=>"65"}
+  [1m[36mService Load (0.2ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 65], ["LIMIT", 1]]
+Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 0.4ms)
+Processing by Api::V1::ServicesController#show as HTML
+  Parameters: {"id"=>"xpto"}
+  [1m[36mService Load (0.4ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 2ms (Views: 0.3ms | ActiveRecord: 0.4ms)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.4ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:36:18.101180"], ["updated_at", "2019-10-25 21:36:18.101180"]]
+  [1m[35m (8.1ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#index as HTML
+  [1m[36mService Load (0.6ms)[0m  [1m[34mSELECT "services".* FROM "services"[0m
+Completed 200 OK in 13ms (Views: 12.3ms | ActiveRecord: 0.6ms)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.3ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:36:18.128726"], ["updated_at", "2019-10-25 21:36:18.128726"]]
+  [1m[35m (3.3ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#update as HTML
+  Parameters: {"service"=>{"description"=>"Com shampoo cheiroso", "name"=>"Lavagem de cabelo"}, "id"=>"67"}
+  [1m[36mService Load (0.8ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 67], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Update (0.3ms)[0m  [1m[33mUPDATE "services" SET "name" = $1, "description" = $2, "updated_at" = $3 WHERE "services"."id" = $4[0m  [["name", "Lavagem de cabelo"], ["description", "Com shampoo cheiroso"], ["updated_at", "2019-10-25 21:36:18.139335"], ["id", 67]]
+  [1m[35m (3.9ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 10ms (Views: 0.5ms | ActiveRecord: 5.1ms)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.3ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:36:18.148816"], ["updated_at", "2019-10-25 21:36:18.148816"]]
+  [1m[35m (5.6ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#update as HTML
+  Parameters: {"service"=>{"description"=>"Com shampoo cheiroso", "name"=>"Lavagem de cabelo"}, "id"=>"68"}
+  [1m[36mService Load (0.3ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 68], ["LIMIT", 1]]
+Completed 422 Unprocessable Entity in 2ms (Views: 0.3ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.4ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:36:18.163347"], ["updated_at", "2019-10-25 21:36:18.163347"]]
+  [1m[35m (2.0ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#update as HTML
+  Parameters: {"id"=>"5684565"}
+  [1m[36mService Load (0.7ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 5684565], ["LIMIT", 1]]
+Completed 404 Not Found in 3ms (Views: 0.5ms | ActiveRecord: 0.7ms)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.3ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:36:18.173889"], ["updated_at", "2019-10-25 21:36:18.173889"]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#destroy as HTML
+  Parameters: {"id"=>"70"}
+  [1m[36mService Load (0.3ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 70], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Destroy (0.3ms)[0m  [1m[31mDELETE FROM "services" WHERE "services"."id" = $1[0m  [["id", 70]]
+  [1m[35m (7.9ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 11ms (Views: 0.8ms | ActiveRecord: 8.6ms)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.3ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:36:18.192500"], ["updated_at", "2019-10-25 21:36:18.192500"]]
+  [1m[35m (6.9ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#destroy as HTML
+  Parameters: {"id"=>"xpto"}
+  [1m[36mService Load (0.3ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 0], ["LIMIT", 1]]
+Completed 404 Not Found in 2ms (Views: 0.4ms | ActiveRecord: 0.3ms)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mService Create (0.3ms)[0m  [1m[32mINSERT INTO "services" ("name", "description", "duration", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Corte de Cabelo"], ["description", "Corte bem bonito"], ["duration", 1], ["created_at", "2019-10-25 21:36:18.206811"], ["updated_at", "2019-10-25 21:36:18.206811"]]
+  [1m[35m (3.4ms)[0m  [1m[35mCOMMIT[0m
+Processing by Api::V1::ServicesController#destroy as HTML
+  Parameters: {"id"=>"72"}
+  [1m[36mService Load (0.3ms)[0m  [1m[34mSELECT  "services".* FROM "services" WHERE "services"."id" = $1 LIMIT $2[0m  [["id", 72], ["LIMIT", 1]]
+Completed 422 Unprocessable Entity in 2ms (Views: 0.2ms | ActiveRecord: 0.3ms)
