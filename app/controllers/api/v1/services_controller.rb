@@ -1,53 +1,46 @@
 class Api::V1::ServicesController < ApplicationController
+
   before_action :set_service, only: [:show, :edit, :update, :destroy]
 
   # GET /services
   # GET /services.json
   def index
     @services = Service.all
+    render json: { services: @services }, status: :ok
   end
 
   # GET /services/1
   # GET /services/1.json
   def show
-  end
-
-  # GET /services/new
-  def new
-    @service = Service.new
-  end
-
-  # GET /services/1/edit
-  def edit
+    if @service.present?
+      render json: @service, status: :ok
+    else
+      render json: { message: 'Serviço não encontrado'}, status: :not_found
+    end
   end
 
   # POST /services
   # POST /services.json
   def create
     @service = Service.new(service_params)
-
-    respond_to do |format|
-      if @service.save
-        format.html { redirect_to @service, notice: 'Service was successfully created.' }
-        format.json { render :show, status: :created, location: @service }
-      else
-        format.html { render :new }
-        format.json { render json: @service.errors, status: :unprocessable_entity }
-      end
+    if @service.save
+      render json: @service, status: :created
+    else
+      render json: { message: 'Falha ao criar serviço', errors: @service.errors }, status: :unprocessable_entity 
     end
   end
 
   # PATCH/PUT /services/1
   # PATCH/PUT /services/1.json
   def update
-    respond_to do |format|
-      if @service.update(service_params)
-        format.html { redirect_to @service, notice: 'Service was successfully updated.' }
-        format.json { render :show, status: :ok, location: @service }
+    if @service.present?
+      if @service.update_attributes(service_params)
+        render json: @service, status: :ok
       else
-        format.html { render :edit }
-        format.json { render json: @service.errors, status: :unprocessable_entity }
+        render json: { message: 'Falha ao atualizar serviço' }, status: :unprocessable_entity
       end
+    else
+      render json: { message: 'Serviço não encontrado'}, status: :not_found
     end
   end
 
@@ -64,11 +57,11 @@ class Api::V1::ServicesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_service
-      @service = Service.find(params[:id])
+      @service = Service.find_by(id: params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
       params.require(:service).permit(:name, :description, :duration)
     end
-end
+  end
