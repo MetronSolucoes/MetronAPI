@@ -35,7 +35,7 @@ class Api::V1::ServicesController < ApplicationController
 
   def destroy
     service = set_service
-    service.destroy
+    render json: { message: 'Falha ao deletar serviço' }, status: :unprocessable_entity unless service.destroy
   end
 
   private

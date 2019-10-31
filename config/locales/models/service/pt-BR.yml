@@ -6,3 +6,5 @@ pt-BR:
           attributes:
             name:
               taken: 'Nome desse serviço já existente.'
+      messages:
+        record_invalid: 'Serviço inválido.'
