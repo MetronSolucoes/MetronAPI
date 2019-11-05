@@ -5,7 +5,7 @@ class Api::V1::CustomersController < ApplicationController
 
   def index
     customers = Customer.all
-    render json: customers, status: :created
+    render json: customers, status: :ok
   end
 
   def show
@@ -26,17 +26,16 @@ class Api::V1::CustomersController < ApplicationController
   def update
     customer = set_customer
 
-    if customer.update(customer_params)
+    if customer.update_attributes(customer_params)
       render json:customer, status: :ok
     else
-      render json: { message: 'Falha ao atualizar serviço', errors: customer.errors }, status: :unprocessable_entity
+      render json: { message: 'Falha ao atualizar cliente', errors: customer.errors }, status: :unprocessable_entity
     end
   end
 
   def destroy
     customer = set_customer
-    customer.destroy
-    render json: '', status: :no_content
+    render json: { message: 'Falha ao deletar cliente' }, status: :unprocessable_entity unless customer.destroy
   end
 
   private
