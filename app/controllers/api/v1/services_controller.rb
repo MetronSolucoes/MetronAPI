@@ -4,7 +4,7 @@ class Api::V1::ServicesController < ApplicationController
   end
 
   def index
-    services = Service.all
+    services = Service.ransack(params[:q]).result
     render json: services, status: :ok
   end
 

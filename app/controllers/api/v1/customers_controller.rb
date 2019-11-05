@@ -4,8 +4,8 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def index
-    customers = Customer.all
-    render json: customers, status: :ok
+    customers = Customer.ransack(params[:q]).result
+    render json: customers, status: :okservices
   end
 
   def show
