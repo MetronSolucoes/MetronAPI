@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-	protect_from_forgery with: :null_session
+	#protect_from_forgery with: :null_session
 
   def render_json_error(status, error_code, extra = {})
     status = Rack::Utils::SYMBOL_TO_STATUS_CODE[status] if status.is_a? Symbol
