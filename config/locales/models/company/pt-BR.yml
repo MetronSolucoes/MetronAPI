@@ -1,0 +1,11 @@
+pt-BR:
+  activerecord:
+    errors:
+      models:
+        company:
+          attributes:
+            phone:
+              too_long: 'Telefone muito longo(deve ter no máximo 20 caracteres).'
+              too_short: 'Telefone muito curto(deve ter no minímo 8 caracteres).'
+            email:
+              invalid: 'Email inválido.'

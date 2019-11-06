@@ -1,4 +1,4 @@
-class Api::V1::CustomersController < ApplicationController  
+class Api::V1::CustomersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound do |e|
     render_json_error :not_found, :customer_not_found
   end
