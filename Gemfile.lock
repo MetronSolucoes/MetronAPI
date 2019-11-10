@@ -104,6 +104,9 @@ GEM
       method_source (~> 0.9.0)
     pry-rails (0.3.9)
       pry (>= 0.10.4)
+    pry-remote (0.1.8)
+      pry (~> 0.9)
+      slop (~> 3.0)
     puma (3.12.1)
     rack (2.0.7)
     rack-cors (1.0.3)
@@ -177,6 +180,7 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
+    slop (3.6.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -221,6 +225,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   pg
   pry-rails
+  pry-remote
   puma (~> 3.11)
   rack-cors
   rails (~> 5.2.3)

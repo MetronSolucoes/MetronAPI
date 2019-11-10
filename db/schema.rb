@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_06_230813) do
+ActiveRecord::Schema.define(version: 2019_11_10_034258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,25 @@ ActiveRecord::Schema.define(version: 2019_11_06_230813) do
     t.index ["phone"], name: "index_customers_on_phone", unique: true
   end
 
+  create_table "scheduling_statuses", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "schedulings", force: :cascade do |t|
+    t.bigint "customer_id"
+    t.bigint "service_id"
+    t.bigint "scheduling_status_id"
+    t.datetime "start"
+    t.datetime "finish"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_schedulings_on_customer_id"
+    t.index ["scheduling_status_id"], name: "index_schedulings_on_scheduling_status_id"
+    t.index ["service_id"], name: "index_schedulings_on_service_id"
+  end
+
   create_table "services", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -69,4 +88,7 @@ ActiveRecord::Schema.define(version: 2019_11_06_230813) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "schedulings", "customers"
+  add_foreign_key "schedulings", "scheduling_statuses"
+  add_foreign_key "schedulings", "services"
 end

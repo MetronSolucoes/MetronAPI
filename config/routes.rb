@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :services
       resources :customers
+      resources :schedulings
 
       get 'companies', to: 'companies#show'
       put 'companies', to: 'companies#update'
