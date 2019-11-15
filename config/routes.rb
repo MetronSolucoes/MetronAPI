@@ -4,6 +4,9 @@ Rails.application.routes.draw do
       resources :services
       resources :customers
       resources :schedulings
+      get 'schedulings/index/not_canceleds', to: 'schedulings#index_without_canceleds'
+      put 'schedulings/cancel/:id', to: 'schedulings#cancel_scheduling'
+      post 'schedulings/available_times', to: 'schedulings#available_times'
 
       get 'companies', to: 'companies#show'
       put 'companies', to: 'companies#update'

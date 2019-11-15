@@ -8,6 +8,11 @@ class Api::V1::SchedulingsController < ApplicationController
     render json: schedulings, status: :ok #ajustar retorno do relacionamento
   end
 
+  def index_without_canceleds
+    schedulings = Scheduling.not_canceled.ransack(params[:q]).result
+    render json: schedulings, status: :ok    
+  end
+
   def show
     scheduling = set_scheduling #tirar os cancelados? e para o backoffice? ou so fazer logica de nao considerar cancelados na parte do retorno do horario
     render json: scheduling, status: :ok #ajustar retorno do relacionamento
@@ -23,20 +28,52 @@ class Api::V1::SchedulingsController < ApplicationController
     end
   end
 
-  # def update
-  #   scheduling = set_scheduling
+  def update
+    scheduling = set_scheduling
     
-  #   if scheduling.update_attributes(scheduling_params)
-  #     render json: scheduling, status: :ok
-  #   else
-  #     render json: { message: 'Falha ao atualizar agendamento' }, status: :unprocessable_entity
-  #   end
-  # end
+    if scheduling.update_attributes(scheduling_params)
+      render json: scheduling, status: :ok
+    else
+      render json: { message: 'Falha ao atualizar agendamento' }, status: :unprocessable_entity
+    end
+  end
+
+  def cancel_scheduling
+    scheduling = set_scheduling
+
+    scheduling.scheduling_status_id = SchedulingStatus::CANCELED
+
+    if scheduling.save
+      render json: scheduling, status: :ok 
+    else
+      render json: { message: 'Falha ao cancelar agendamento' }, status: :unprocessable_entity
+    end
+  end
 
   def destroy
     scheduling = set_scheduling
     scheduling.scheduling_status_id = SchedulingStatus::CANCELED
     render json: { message: 'Falha ao deletar agendamento' }, status: :unprocessable_entity unless scheduling.save
+  end
+
+  def available_times
+    initial_check = params[:initial_check].to_datetime
+    final_check = params[:final_check].to_datetime
+    schedulings = Scheduling.not_canceled.where("(start > ? AND start < ?) OR (finish > ? AND finish < ?)", initial_check, final_check, initial_check, final_check)
+
+    available_times = []
+    schedulings.each do |scheduling|
+      if initial_check > scheduling.start
+        available_times.push({ initial: scheduling.finish, final: final_check })
+      elsif final_check <  scheduling.finish
+        available_times.push({ initial: initial_check, final: scheduling.start })
+      else
+        available_times.push({ initial: initial_check, final: scheduling.start })    
+        available_times.push({ initial: scheduling.finish, final: final_check })    
+      end
+    end
+
+    render json: available_times, status: :ok
   end
 
   private

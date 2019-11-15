@@ -5,6 +5,8 @@ class Scheduling < ApplicationRecord
 
   validate :is_available
 
+  scope :not_canceled, -> { where.not(scheduling_status_id: SchedulingStatus::CANCELED) }
+
   def is_available
     errors.add(:start, :date_invalid) if schedulign_date_is_invalid?
   end
