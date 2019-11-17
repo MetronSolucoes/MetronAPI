@@ -5,17 +5,17 @@ class Api::V1::SchedulingsController < ApplicationController
 
   def index
     schedulings = Scheduling.ransack(params[:q]).result
-    render json: schedulings, status: :ok #ajustar retorno do relacionamento
+    render json: response_schedulings(schedulings), status: :ok #ajustar retorno do relacionamento
   end
 
   def index_without_canceleds
     schedulings = Scheduling.not_canceled.ransack(params[:q]).result
-    render json: schedulings, status: :ok    
+    render json: response_schedulings(schedulings), status: :ok
   end
 
   def show
     scheduling = set_scheduling #tirar os cancelados? e para o backoffice? ou so fazer logica de nao considerar cancelados na parte do retorno do horario
-    render json: scheduling, status: :ok #ajustar retorno do relacionamento
+    render json: response_scheduling(scheduling), status: :ok #ajustar retorno do relacionamento
   end
 
   def create
@@ -83,5 +83,29 @@ class Api::V1::SchedulingsController < ApplicationController
 
     def scheduling_params
       params.require(:scheduling).permit(:customer_id, :service_id, :scheduling_status_id, :start, :finish)
+    end
+
+    def response_schedulings(schedulings)
+      response = []
+
+      schedulings.each do |scheduling|
+        response.push(response_scheduling(scheduling))
+      end
+
+      response
+    end
+
+    def response_scheduling(scheduling)
+      {
+        customer_id: scheduling.customer_id,
+        customer_name: scheduling.customer.name,
+        customer_last_name: scheduling.customer.last_name,
+        service_id: scheduling.service_id,
+        service_name: scheduling.service.name,
+        scheduling_scheduling_status_id: scheduling.scheduling_status_id,
+        scheduling_scheduling_status_name: scheduling.scheduling_status.name,
+        scheduling_start: scheduling.start,
+        scheduling_finish: scheduling.finish
+      }
     end
 end
