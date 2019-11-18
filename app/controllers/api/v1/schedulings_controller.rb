@@ -97,6 +97,7 @@ class Api::V1::SchedulingsController < ApplicationController
 
     def response_scheduling(scheduling)
       {
+        id: schedulings.id,
         customer_id: scheduling.customer_id,
         customer_name: scheduling.customer.name,
         customer_last_name: scheduling.customer.last_name,
