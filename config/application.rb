@@ -17,6 +17,8 @@ module MetronV0
     # the framework and any gems in your application.
 
     config.i18n.default_locale = 'pt-BR'
+    config.autoload_paths << Rails.root.join('app/resources')
+    config.eager_load_paths += Dir[Rails.root.join('app', 'models', '**', '*')]
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
 
     config.middleware.insert_before 0, Rack::Cors do
