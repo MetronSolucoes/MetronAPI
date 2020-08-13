@@ -2,8 +2,8 @@ class Api::V1::CustomersController < Api::V1::ApplicationController
   before_action :set_customer, only: [:show, :update, :destroy]
 
   def index
-    customers = Customer.ransack(params[:q]).result
-    render json: customers, each_serializer: Api::V1::CustomerSerializer, status: :ok
+    customers = Customer.__search(params)
+    render json: customers, meta: pagination(customers), each_serializer: Api::V1::CustomerSerializer, status: :ok
   end
 
   def show

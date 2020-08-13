@@ -2,13 +2,13 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
   before_action :set_scheduling, only: [:show, :update, :destroy, :cancel_scheduling]
 
   def index
-    schedulings = Scheduling.ransack(params[:q]).result
-    render json: schedulings, each_serializer: Api::V1::SchedulingSerializer, status: :ok #ajustar retorno do relacionamento
+    schedulings = Scheduling.__search(params)
+    render json: schedulings, meta: pagination(schedulings), each_serializer: Api::V1::SchedulingSerializer, status: :ok
   end
 
   def index_without_canceleds
-    schedulings = Scheduling.not_canceled.ransack(params[:q]).result
-    render json: schedulings, each_serializer: Api::V1::SchedulingSerializer, status: :ok
+    schedulings = Scheduling.not_canceled.__search(params)
+    render json: schedulings, meta: pagination(schedulings), each_serializer: Api::V1::SchedulingSerializer, status: :ok
   end
 
   def show

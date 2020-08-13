@@ -2,8 +2,8 @@ class Api::V1::ServicesController < Api::V1::ApplicationController
   before_action :set_service, only: [:show, :update, :destroy]
 
   def index
-    services = Service.ransack(params[:q]).result
-    render json: services, each_serializer: Api::V1::ServiceSerializer, status: :ok
+    services = Service.__search(params)
+    render json: services, meta: pagination(services), each_serializer: Api::V1::ServiceSerializer, status: :ok
   end
 
   def show
