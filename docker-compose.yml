@@ -1,15 +1,57 @@
 version: '3'
+networks:
+  metron-network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.10.0/24
 services:
+  api:
+    build: .
+    tty: true
+    stdin_open: true
+    container_name: metron_api
+    privileged: true
+    command: >
+          bash -c "bundler install --quiet &&
+                  yarn install --no-install-recommends &&
+                  bundler exec rails db:create &&
+                  bundler exec rails db:migrate &&
+                  bundler exec rails db:seed &&
+                  rm -f tmp/pids/server.pid &&
+                  bundle exec rails server -b 0.0.0.0"
+    environment:
+      - "DATABASE_HOST=db"
+      - "DATABASE_USERNAME=postgres"
+      - "DATABASE_PASSWORD=docker#Metron@"
+    networks:
+      - metron-network
+    volumes:
+      - ./:/app
+    ports:
+        - "3001:3000"
   db:
-    image: postgres
+    container_name: database
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: docker#Metron@
+    networks:
+      - metron-network
+    ports:
+      - "5432:5432"
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
-  web:
-    build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    volumes:
-      - .:/myapp
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    networks:
+      - metron-network
     ports:
-      - "3000:3000"
-    depends_on:
-      - db
+      - "4000:80"
+    stdin_open: true
+    tty: true
+    environment:
+      - "PGADMIN_DEFAULT_PASSWORD=docker"
+      - "PGADMIN_DEFAULT_EMAIL=ti@metron.com"
