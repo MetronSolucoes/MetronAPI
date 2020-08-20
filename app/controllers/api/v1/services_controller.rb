@@ -22,7 +22,7 @@ class Api::V1::ServicesController < Api::V1::ApplicationController
 
   def update
     if @service.update_attributes(service_params)
-      render json: service, serializer: Api::V1::ServiceSerializer, status: :ok
+      render json: @service, serializer: Api::V1::ServiceSerializer, status: :ok
     else
       render json_validation_error(@service, 'Falha ao atualizar serviço')
     end

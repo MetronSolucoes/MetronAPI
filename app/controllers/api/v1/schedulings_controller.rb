@@ -37,7 +37,7 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
 
   def cancel_scheduling
     if @scheduling.update_attributes(scheduling_status_id: SchedulingStatus::CANCELED)
-      render json: scheduling, serializer: Api::V1::SchedulingSerializer, status: :ok
+      render json: @scheduling, serializer: Api::V1::SchedulingSerializer, status: :ok
     else
       render json_validation_error(@scheduling, 'Falha ao cancelar agendamento')
     end

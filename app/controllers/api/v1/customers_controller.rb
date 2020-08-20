@@ -1,4 +1,5 @@
 class Api::V1::CustomersController < Api::V1::ApplicationController
+
   before_action :set_customer, only: [:show, :update, :destroy]
 
   def index
@@ -7,7 +8,7 @@ class Api::V1::CustomersController < Api::V1::ApplicationController
   end
 
   def show
-    render json: customer, serializer: Api::V1::CustomerSerializer, status: :ok
+    render json: @customer, serializer: Api::V1::CustomerSerializer, status: :ok
   end
 
   def create
