@@ -1,4 +1,7 @@
 class Scheduling < ApplicationRecord
+
+  include SchedulingQuery
+
   belongs_to :customer
   belongs_to :service
   belongs_to :scheduling_status
@@ -13,11 +16,11 @@ class Scheduling < ApplicationRecord
 
   def schedulign_date_is_invalid?
     return true if Scheduling.where(start: self.start..self.finish).
-                    where.not(id: self.id, scheduling_status_id: SchedulingStatus::CANCELED).present?
+      where.not(id: self.id, scheduling_status_id: SchedulingStatus::CANCELED).present?
     return true if Scheduling.where(finish: self.start..self.finish).
-                    where.not(id: self.id, scheduling_status_id: SchedulingStatus::CANCELED).present?
+      where.not(id: self.id, scheduling_status_id: SchedulingStatus::CANCELED).present?
     return true if Scheduling.where("start < ? AND finish > ?", self.start, self.start).
-                    where.not(id: self.id, scheduling_status_id: SchedulingStatus::CANCELED).present?
+      where.not(id: self.id, scheduling_status_id: SchedulingStatus::CANCELED).present?
 
     false
   end

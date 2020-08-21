@@ -1,49 +1,49 @@
-class Api::V1::CustomersController < ApplicationController
-  rescue_from ActiveRecord::RecordNotFound do |e|
-    render_json_error :not_found, :customer_not_found
-  end
+class Api::V1::CustomersController < Api::V1::ApplicationController
+
+  before_action :set_customer, only: [:show, :update, :destroy]
 
   def index
-    customers = Customer.ransack(params[:q]).result
-    render json: customers, status: :ok
+    customers = Customer.__search(params)
+    render json: customers, meta: pagination(customers), each_serializer: Api::V1::CustomerSerializer, status: :ok
   end
 
   def show
-    customer = set_customer
-    render json: customer, status: :ok
+    render json: @customer, serializer: Api::V1::CustomerSerializer, status: :ok
   end
 
   def create
     customer = Customer.new(customer_params)
 
     if customer.save
-      render json: customer, status: :created
+      render json: customer, serializer: Api::V1::CustomerSerializer, status: :created
     else
-      render json: { message: 'Falha ao criar cliente', errors: customer.errors }, status: :unprocessable_entity
+      render json_validation_error(customer, 'Falha ao criar cliente')
     end
   end
 
   def update
-    customer = set_customer
-
-    if customer.update_attributes(customer_params)
-      render json:customer, status: :ok
+    if @customer.update_attributes(customer_params)
+      render json: @customer, serializer: Api::V1::CustomerSerializer, status: :ok
     else
-      render json: { message: 'Falha ao atualizar cliente', errors: customer.errors }, status: :unprocessable_entity
+      render json_validation_error(@customer, 'Falha ao atualizar cliente')
     end
   end
 
   def destroy
-    customer = set_customer
-    render json: { message: 'Falha ao deletar cliente' }, status: :unprocessable_entity unless customer.destroy
+    if @customer.destroy
+      render json_destroy_success('Cliente excluído com sucesso')
+    else
+      render json_destroy_error('Falha ao excluir cliente')
+    end
   end
 
   private
-    def set_customer
-      Customer.find(params[:id])
-    end
 
-    def customer_params
-      params.require(:customer).permit(:name, :last_name, :cpf, :phone, :email)
-    end
+  def set_customer
+    @customer = Customer.find(params[:id])
+  end
+
+  def customer_params
+    params.require(:customer).permit(:name, :last_name, :cpf, :phone, :email)
+  end
 end
