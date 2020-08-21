@@ -3,8 +3,6 @@ module Api::V1::ApplicationManager
     DEFAULT_PAGE = 1
     DEFAULT_PER_PAGE = 20
 
-    attr_reader :resource
-
     def build
       filter
     end
@@ -28,7 +26,7 @@ module Api::V1::ApplicationManager
     def initialize(page, per_page, filters = {})
       self.page = page
       self.per_page = per_page
-      @filters = filters
+      @filters = filters.with_indifferent_access
     end
   end
 end

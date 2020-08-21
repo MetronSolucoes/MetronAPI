@@ -1,16 +1,17 @@
 module Api::V1::CustomerManager
-  class Updater < ApplicationManager::Updater
+  class Updater < Api::V1::ApplicationManager::Updater
     private
 
     def execute_update
       customer = Customer.find_by!(id: id)
       customer.update!(@params)
 
-      account
+      customer
     end
 
     def initialize(id, params)
       super(id)
-      @params = params.slice(:name) #aqui viria os parametros que podem ser editados, coloquei so um de exemplo
+      @params = params.slice(:name, :last_name, :cpf, :phone, :email)
     end
+  end
 end
