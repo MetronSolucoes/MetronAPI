@@ -1,4 +1,4 @@
-module CustomerManager
+module Api::V1::CustomerManager
   class Lister < ApplicationManager::Lister
     private
 

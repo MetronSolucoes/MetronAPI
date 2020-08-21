@@ -1,4 +1,4 @@
-module ApplicationManager
+module Api::V1::ApplicationManager
   class Creator
     def create(with_transaction = true)
       if with_transaction

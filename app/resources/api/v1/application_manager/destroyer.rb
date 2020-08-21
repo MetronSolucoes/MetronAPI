@@ -1,4 +1,4 @@
-module ApplicationManager
+module Api::V1::ApplicationManager
   class Destroyer
     attr_accessor :id
 

@@ -1,14 +1,14 @@
-module ApplicationManager
-  class Updater
+module Api::V1::ApplicationManager
+  class Shower
     attr_accessor :id
 
-    def update
-      ActiveRecord::Base.transaction { execute_update }
+    def build
+      instance
     end
 
     private
 
-    def execute_update
+    def instance
       raise NotImplementedError
     end
 

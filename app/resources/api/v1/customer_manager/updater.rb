@@ -1,4 +1,4 @@
-module CustomerManager
+module Api::V1::CustomerManager
   class Updater < ApplicationManager::Updater
     private
 

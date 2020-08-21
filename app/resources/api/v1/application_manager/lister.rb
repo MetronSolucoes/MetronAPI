@@ -1,4 +1,4 @@
-module ApplicationManager
+module Api::V1::ApplicationManager
   class Lister
     DEFAULT_PAGE = 1
     DEFAULT_PER_PAGE = 20
