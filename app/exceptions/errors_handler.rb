@@ -3,6 +3,7 @@ module ErrorsHandler
     def self.included(clazz)
       clazz.class_eval do
         rescue_from ActiveRecord::RecordNotFound, with: :json_not_found_message
+        rescue_from CustomException, with: :json_custom_error
       end
     end
 
@@ -27,6 +28,15 @@ module ErrorsHandler
         },
         status: :unprocessable_entity
       }
+    end
+
+    def json_custom_error(exception)
+      render json: {
+        error: {
+          code: 422,
+          message: exception.message
+        }
+      }, status: :unprocessable_entity
     end
 
     def json_destroy_error(message)

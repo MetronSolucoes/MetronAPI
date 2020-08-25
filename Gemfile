@@ -33,7 +33,8 @@ gem 'jbuilder', '~> 2.5'
 gem "cpf_cnpj"
 gem 'fast_jsonapi'
 gem 'pry-rails'
-gem 'ransack'
+gem 'ransack', '~> 2.3', '>= 2.3.2'
+gem 'kaminari'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
