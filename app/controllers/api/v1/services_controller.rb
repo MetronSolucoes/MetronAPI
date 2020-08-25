@@ -1,19 +1,20 @@
 class Api::V1::ServicesController < Api::V1::ApplicationController
-  before_action :set_service, only: [:show, :update, :destroy]
+  before_action :set_service, only: [:update, :destroy]
 
   def index
-    services = Service.__search(params)
+    services = Api::V1::ServiceManager::Lister.new(0, 0, params).build
     render json: services, meta: pagination(services), each_serializer: Api::V1::ServiceSerializer, status: :ok
   end
 
   def show
-    render json: @service, serializer: Api::V1::ServiceSerializer, status: :ok
+    service = Api::V1::ServiceManager::Shower.new(params[:id]).build
+    render json: service, serializer: Api::V1::ServiceSerializer, status: :ok
   end
 
   def create
-    service = Service.new(service_params)
+    service = Api::V1::ServiceManager::Creator.new(service_params).create
 
-    if service.save
+    if service.errors.blank?
       render json: service, serializer: Api::V1::ServiceSerializer, status: :created
     else
       render json_validation_error(service, 'Falha ao criar serviço')
