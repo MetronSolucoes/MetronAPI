@@ -1,6 +1,6 @@
 module Api::V1::ApplicationManager
   class Updater
-    attr_accessor :id
+    attr_accessor :id, :params
 
     def update
       ActiveRecord::Base.transaction { execute_update }
@@ -12,8 +12,9 @@ module Api::V1::ApplicationManager
       raise NotImplementedError
     end
 
-    def initialize(id)
+    def initialize(id, params = nil)
       @id = id
+      @params = params
     end
   end
 end
