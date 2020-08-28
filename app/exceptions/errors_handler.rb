@@ -39,7 +39,7 @@ module ErrorsHandler
       }, status: :unprocessable_entity
     end
 
-    def json_destroy_error(message)
+    def json_error(message)
       {
         json: {
           error: {

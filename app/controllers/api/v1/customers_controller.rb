@@ -31,9 +31,9 @@ class Api::V1::CustomersController < Api::V1::ApplicationController
 
   def destroy
     if @customer.destroy
-      render json_destroy_success('Cliente excluído com sucesso')
+      render json_success('Cliente excluído com sucesso')
     else
-      render json_destroy_error('Falha ao excluir cliente')
+      render json_error('Falha ao excluir cliente')
     end
   end
 
