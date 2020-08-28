@@ -4,7 +4,7 @@ module Api::V1::ApplicationManager
     DEFAULT_PER_PAGE = 20
 
     def build
-      filter.page(@page).per(@per_page)
+      filter
     end
 
     private
@@ -26,7 +26,7 @@ module Api::V1::ApplicationManager
     def initialize(page, per_page, filters = {})
       self.page = page
       self.per_page = per_page
-      @filters = filters.with_indifferent_access
+      @filters = filters
     end
   end
 end
