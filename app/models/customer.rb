@@ -1,6 +1,9 @@
 require 'cpf_cnpj'
 
 class Customer < ApplicationRecord
+
+  include CustomerQuery
+
   validates_presence_of :name, :last_name
   validates_length_of :phone, minimum: 8, maximum: 20, allow_blank: false
   validate :check_cpf_validity
