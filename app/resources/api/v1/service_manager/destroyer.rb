@@ -4,12 +4,7 @@ module Api::V1::ServiceManager
     private
 
     def execute_destruction
-      service = find_service
-      service.destroy
-    end
-
-    def find_service
-      Service.find_by!(id: id)
+      Service.find_by!(id: id).destroy
     end
   end
 end
