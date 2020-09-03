@@ -1,12 +1,12 @@
 module Api::V1::EmployeManager
-  class Creator < ApplicationManager::Creator
+  class Creator < Api::V1::ApplicationManager::Creator
     attr_accessor :params
+
+    private
 
     def initialize(params)
       @params = params
     end
-
-    private
 
     def execute_creation
       validate_company!
