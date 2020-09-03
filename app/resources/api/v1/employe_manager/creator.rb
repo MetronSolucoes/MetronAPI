@@ -10,8 +10,7 @@ module Api::V1::EmployeManager
 
     def execute_creation
       validate_company!
-      employe = Employe.create(params)
-      employe
+      Employe.create!(params)
     end
 
     def validate_company!

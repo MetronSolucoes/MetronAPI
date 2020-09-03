@@ -5,8 +5,8 @@ module Api::V1::EmployeManager
 
     def execute_update
       employe = find_employe
-      validate_company if params[:company_id].present?
-      employe.update(params)
+      validate_company
+      employe.update!(params)
       employe
     end
 
@@ -15,6 +15,7 @@ module Api::V1::EmployeManager
     end
 
     def validate_company
+      return if params[:company_id].blank?
       Company.find_by!(id: params[:company_id])
     end
   end

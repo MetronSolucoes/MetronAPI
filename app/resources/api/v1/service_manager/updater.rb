@@ -5,7 +5,7 @@ module Api::V1::ServiceManager
 
     def execute_update
       service = find_service
-      service.update(params)
+      service.update!(params)
       service
     end
 

@@ -4,8 +4,6 @@ class Service < ApplicationRecord
   validates_uniqueness_of :name
   validate :validate_duration
 
-
-
   private
 
   def validate_duration
