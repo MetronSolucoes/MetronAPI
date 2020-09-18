@@ -3,11 +3,11 @@ class Api::V1::CustomersController < Api::V1::ApplicationController
 
   def index
     lister = Api::V1::CustomerManager::Lister.new(params[:page], params[:per_page],
-      name: params[:name],
-      last_name: params[:last_name],
-      cpf: params[:cpf],
-      phone: params[:phone],
-      email: params[:email])
+                                                  name: params[:name],
+                                                  last_name: params[:last_name],
+                                                  cpf: params[:cpf],
+                                                  phone: params[:phone],
+                                                  email: params[:email])
     customers = lister.build
     render json: customers, meta: pagination(customers), each_serializer: Api::V1::CustomerSerializer, status: :ok
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_10_034258) do
+ActiveRecord::Schema.define(version: 2020_08_27_224647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,9 +54,34 @@ ActiveRecord::Schema.define(version: 2019_11_10_034258) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.index ["cpf"], name: "index_customers_on_cpf", unique: true
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["phone"], name: "index_customers_on_phone", unique: true
+    t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+  end
+
+  create_table "employe_services", force: :cascade do |t|
+    t.bigint "employe_id"
+    t.bigint "service_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employe_id"], name: "index_employe_services_on_employe_id"
+    t.index ["service_id"], name: "index_employe_services_on_service_id"
+  end
+
+  create_table "employes", force: :cascade do |t|
+    t.bigint "company_id"
+    t.string "name"
+    t.string "last_name"
+    t.string "phone"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_employes_on_company_id"
   end
 
   create_table "scheduling_statuses", force: :cascade do |t|
@@ -88,6 +113,9 @@ ActiveRecord::Schema.define(version: 2019_11_10_034258) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "employe_services", "employes"
+  add_foreign_key "employe_services", "services"
+  add_foreign_key "employes", "companies"
   add_foreign_key "schedulings", "customers"
   add_foreign_key "schedulings", "scheduling_statuses"
   add_foreign_key "schedulings", "services"

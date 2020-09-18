@@ -37,7 +37,7 @@ class Api::V1::ServicesController < Api::V1::ApplicationController
     if service.destroy
       render json_destroy_success('Serviço excluído com sucesso')
     else
-      render json_destroy_error('Falha ao excluir serviço')
+      render json_error('Falha ao excluir serviço')
     end
   end
 

@@ -4,7 +4,7 @@ class Api::V1::ApplicationController < ActionController::API
   include ActionController::Serialization
   include ActionController::HttpAuthentication::Basic::ControllerMethods
 
-  def json_destroy_success(message)
+  def json_success(message)
     {
       json: {
         message: message

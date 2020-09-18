@@ -4,6 +4,7 @@ pt-BR:
     'Customer': 'Cliente '
     'Service': 'Serviço '
     'Scheduling': 'Agendamento '
+    'Employe': 'Funcionário '
   time:
     formats:
       default: ! '%a, %d de %B de %Y, %H:%M:%S %z'

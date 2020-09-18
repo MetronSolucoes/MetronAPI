@@ -5,6 +5,11 @@ Rails.application.routes.draw do
       resources :services
       resources :customers
       resources :schedulings
+      resources :employes do
+        post '/link_service/:service_id', to: 'employes#link_service'
+        delete '/unlink_service/:service_id', to: 'employes#unlink_service'
+      end
+
       get 'schedulings/index/not_canceleds', to: 'schedulings#index_without_canceleds'
       put 'schedulings/cancel/:id', to: 'schedulings#cancel_scheduling'
       post 'schedulings/available_times', to: 'schedulings#available_times'
