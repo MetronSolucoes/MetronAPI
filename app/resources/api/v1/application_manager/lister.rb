@@ -3,8 +3,6 @@ module Api::V1::ApplicationManager
     DEFAULT_PAGE = 1
     DEFAULT_PER_PAGE = 20
 
-    attr_reader :resource
-
     def build
       filter
     end
