@@ -1,19 +1,20 @@
 class Api::V1::ServicesController < Api::V1::ApplicationController
-  before_action :set_service, only: [:show, :update, :destroy]
+  before_action :set_service, only: [:destroy]
 
   def index
-    services = Service.__search(params)
+    services = Api::V1::ServiceManager::Lister.new(0, 0, params).build
     render json: services, meta: pagination(services), each_serializer: Api::V1::ServiceSerializer, status: :ok
   end
 
   def show
-    render json: @service, serializer: Api::V1::ServiceSerializer, status: :ok
+    service = Api::V1::ServiceManager::Shower.new(params[:id]).build
+    render json: service, serializer: Api::V1::ServiceSerializer, status: :ok
   end
 
   def create
-    service = Service.new(service_params)
+    service = Api::V1::ServiceManager::Creator.new(service_params).create
 
-    if service.save
+    if service.errors.blank?
       render json: service, serializer: Api::V1::ServiceSerializer, status: :created
     else
       render json_validation_error(service, 'Falha ao criar serviço')
@@ -21,15 +22,19 @@ class Api::V1::ServicesController < Api::V1::ApplicationController
   end
 
   def update
-    if @service.update_attributes(service_params)
-      render json: @service, serializer: Api::V1::ServiceSerializer, status: :ok
+    service = Api::V1::ServiceManager::Updater.new(params[:id], service_params).update
+
+    if service.errors.blank?
+      render json: service, serializer: Api::V1::ServiceSerializer, status: :ok
     else
-      render json_validation_error(@service, 'Falha ao atualizar serviço')
+      render json_validation_error(service, 'Falha ao atualizar serviço')
     end
   end
 
   def destroy
-    if @service.destroy
+    service = Api::V1::ServiceManager::Destroyer.new(params[:id])
+
+    if service.destroy
       render json_destroy_success('Serviço excluído com sucesso')
     else
       render json_destroy_error('Falha ao excluir serviço')
