@@ -3,6 +3,7 @@ module ErrorsHandler
     def self.included(clazz)
       clazz.class_eval do
         rescue_from ActiveRecord::RecordNotFound, with: :json_not_found_message
+        rescue_from ActiveRecord::RecordInvalid, with: :json_record_not_valid
         rescue_from CustomException, with: :json_custom_error
       end
     end
@@ -15,6 +16,15 @@ module ErrorsHandler
           message: (I18n.t(exception.model, scope: 'models').presence || '') + I18n.t('errors.messages.not_found')
         }
       }, status: :not_found
+    end
+
+    def json_record_not_valid(exception)
+      render json: {
+        error: {
+          message: I18n.t('errors.messages.fail_on_save') + (I18n.t(exception.record.model_name, scope: 'models').try(:strip).presence || ''),
+          errors: exception.record.try(:errors).presence || ''
+        }
+      }, status: :unprocessable_entity
     end
 
     def json_validation_error(resource, message = nil)

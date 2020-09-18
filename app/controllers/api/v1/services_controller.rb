@@ -13,22 +13,12 @@ class Api::V1::ServicesController < Api::V1::ApplicationController
 
   def create
     service = Api::V1::ServiceManager::Creator.new(service_params).create
-
-    if service.errors.blank?
-      render json: service, serializer: Api::V1::ServiceSerializer, status: :created
-    else
-      render json_validation_error(service, 'Falha ao criar serviço')
-    end
+    render json: service, serializer: Api::V1::ServiceSerializer, status: :created
   end
 
   def update
     service = Api::V1::ServiceManager::Updater.new(params[:id], service_params).update
-
-    if service.errors.blank?
-      render json: service, serializer: Api::V1::ServiceSerializer, status: :ok
-    else
-      render json_validation_error(service, 'Falha ao atualizar serviço')
-    end
+    render json: service, serializer: Api::V1::ServiceSerializer, status: :ok
   end
 
   def destroy

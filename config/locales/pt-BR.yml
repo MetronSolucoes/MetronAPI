@@ -81,3 +81,6 @@ pt-BR:
       blank: 'não pode ficar em branco'
       greater_than_or_equal_to: deve ser maior ou igual a %{count}
       not_found: "não encontrado(a)"
+      fail_on_save: "Falha ao salvar "
+      not_authorized: "não autorizado"
+      not_authenticated: "não autenticado"

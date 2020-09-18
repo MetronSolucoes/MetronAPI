@@ -13,22 +13,12 @@ class Api::V1::EmployesController < Api::V1::ApplicationController
 
   def create
     employe = Api::V1::EmployeManager::Creator.new(employe_params).create
-
-    if employe.errors.blank?
-      render json: employe, serializer: Api::V1::EmployeSerializer, status: :created
-    else
-      render json_validation_error(employe, 'Falha ao criar o funcionário')
-    end
+    render json: employe, serializer: Api::V1::EmployeSerializer, status: :created
   end
 
   def update
     employe = Api::V1::EmployeManager::Updater.new(params[:id], employe_params).update
-
-    if employe.errors.blank?
-      render json: employe, serializer: Api::V1::EmployeSerializer, status: :ok
-    else
-      render json_validation_error(employe, 'Falha ao atualizar funcionário')
-    end
+    render json: employe, serializer: Api::V1::EmployeSerializer, status: :ok
   end
 
   def destroy

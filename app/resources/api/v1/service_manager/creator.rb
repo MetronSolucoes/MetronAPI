@@ -1,5 +1,5 @@
 module Api::V1::ServiceManager
-  class Creator < ApplicationManager::Creator
+  class Creator < Api::V1::ApplicationManager::Creator
     attr_accessor :params
 
     private
@@ -9,7 +9,7 @@ module Api::V1::ServiceManager
     end
 
     def execute_creation
-      Service.create(params)
+      Service.create!(params)
     end
   end
 end
