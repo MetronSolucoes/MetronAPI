@@ -2,7 +2,6 @@ class Api::V1::Backoffice::ServicesController < Api::V1::Backoffice::Application
   before_action :set_service, only: [:destroy]
 
   def index
-    binding.pry
     services = Api::V1::ServiceManager::Lister.new(0, 0, params).build
     render json: services, meta: pagination(services), each_serializer: Api::V1::ServiceSerializer, status: :ok
   end
