@@ -1,4 +1,4 @@
-class Api::V1::CompaniesController < Api::V1::ApplicationController
+class Api::V1::Backoffice::CompaniesController < Api::V1::Backoffice::ApplicationController
 
   def show
     company = Company.first

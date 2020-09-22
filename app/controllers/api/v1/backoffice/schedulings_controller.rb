@@ -1,4 +1,4 @@
-class Api::V1::SchedulingsController < Api::V1::ApplicationController
+class Api::V1::Backoffice::SchedulingsController < Api::V1::Backoffice::ApplicationController
   before_action :set_scheduling, only: [:show, :update, :destroy, :cancel_scheduling]
 
   def index
@@ -41,6 +41,12 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
     else
       render json_validation_error(@scheduling, 'Falha ao cancelar agendamento')
     end
+  end
+
+  # Rever este metodo, esta fazendo a mesam coisa que o de cima
+  def destroy
+    @scheduling.scheduling_status_id = SchedulingStatus::CANCELED
+    render json: { message: 'Falha ao deletar agendamento' }, status: :unprocessable_entity unless @scheduling.save
   end
 
   # Tratar esta lógica em um serviço próprio

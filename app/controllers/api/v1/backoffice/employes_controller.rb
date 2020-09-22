@@ -1,4 +1,4 @@
-class Api::V1::EmployesController < Api::V1::ApplicationController
+class Api::V1::Backoffice::EmployesController < Api::V1::Backoffice::ApplicationController
 
   def index
     employes = Api::V1::EmployeManager::Lister.new(0, 0, params).build

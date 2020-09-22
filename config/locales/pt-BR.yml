@@ -5,6 +5,7 @@ pt-BR:
     'Service': 'Serviço '
     'Scheduling': 'Agendamento '
     'Employe': 'Funcionário '
+    'User': 'Usuário '
   time:
     formats:
       default: ! '%a, %d de %B de %Y, %H:%M:%S %z'
