@@ -1,5 +1,4 @@
 class Api::V1::ServicesController < Api::V1::ApplicationController
-  before_action :set_service, only: [:destroy]
 
   def index
     services = Api::V1::ServiceManager::Lister.new(0, 0, params).build
@@ -12,10 +11,6 @@ class Api::V1::ServicesController < Api::V1::ApplicationController
   end
 
   private
-
-  def set_service
-    @service = Service.find(params[:id])
-  end
 
   def service_params
     params.require(:service).permit(:name, :description, :duration)

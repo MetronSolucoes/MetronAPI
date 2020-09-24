@@ -3,9 +3,9 @@ company = Company.find_or_create_by(name: 'Cristian Barbinhas',
                                     phone: '14997654323',
                                     email: 'cristian_cristian@gmail.com')
 
-if User.find_by(email: 'admin@immunizesystem.com').blank?
+if User.find_by(email: 'admin@metron.com').blank?
   User.create(company_id: company.id, name: 'Administrador', email: 'admin@metron.com',
-              password: 'mudar123', password_confirmation: 'mudar123')
+              password: 'mudar123', password_confirmation: 'mudar123', profile_id: User::ADMIN_PROFILE)
 end
 
 SchedulingStatus.find_or_create_by(id: 1, name: 'Livre')

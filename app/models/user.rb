@@ -14,6 +14,9 @@ class User < ApplicationRecord
 
   TOKEN_KEY = '50146e2f63e9047867457113534c558b'.freeze
 
+  ADMIN_PROFILE = 1
+  EMPLOYE_PROFILE = 2
+
   def self.find_by_token(token)
     return if token.blank?
 
