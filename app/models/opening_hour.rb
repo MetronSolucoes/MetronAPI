@@ -1,4 +1,6 @@
 class OpeningHour < ApplicationRecord
+  include OpeningHourQuery
+
   # de domingo a sabado
   SUNDAY = 0
   MONDAY = 1

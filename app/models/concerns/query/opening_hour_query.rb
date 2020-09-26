@@ -1,4 +1,4 @@
-module CustomerQuery
+module OpeningHourQuery
   extend ActiveSupport::Concern
   include BaseQuery
 
@@ -11,12 +11,7 @@ module CustomerQuery
       return {} unless params
 
       {
-        id_eq: params.dig(:id),
-        name_cont: params.dig(:name),
-        last_name_cont: params.dig(:last_name),
-        cpf_eq: params.dig(:cpf),
-        phone_eq: params.dig(:phone),
-        email_eq: params.dig(:email)
+        weekday_eq: params.dig(:weekday),
       }
     end
 
