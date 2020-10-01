@@ -1,7 +1,7 @@
 class Api::V1::OpeningHoursController < Api::V1::ApplicationController
   def index
     lister = Api::V1::OpeningHourManager::Lister.new(params[:page], params[:per_page],
-      weekday: params[:weekday])
+                                                     weekday: params[:weekday])
     customers = lister.build
     render json: customers, meta: pagination(customers), each_serializer: Api::V1::OpeningHourSerializer, status: :ok
   end
