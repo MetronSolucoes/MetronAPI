@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :services
       resources :customers
       resources :schedulings
+      resources :opening_hours
       resources :employes do
         post '/link_service/:service_id', to: 'employes#link_service'
         delete '/unlink_service/:service_id', to: 'employes#unlink_service'
