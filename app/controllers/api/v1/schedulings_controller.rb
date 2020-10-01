@@ -16,15 +16,9 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
     render json: @scheduling, serializer: Api::V1::SchedulingSerializer, status: :ok #ajustar retorno do relacionamento
   end
 
-  # Criar um serviço especifico para isto
   def create
-    scheduling = Scheduling.new(scheduling_params)
-
-    if scheduling.save
-      render json: scheduling, serializer: Api::V1::SchedulingSerializer, status: :created
-    else
-      render json_validation_error(scheduling.errors, 'Falha ao criar agendamento')
-    end
+    scheduling = Api::V1::SchedulingManager::Creator.new(scheduling_params).create
+    render json: scheduling, status: :created
   end
 
   def update
@@ -71,6 +65,6 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
   end
 
   def scheduling_params
-    params.require(:scheduling).permit(:customer_id, :service_id, :scheduling_status_id, :start, :finish)
+    params.require(:scheduling).permit(:customer_id, :service_id, :scheduling_status_id, :date, :start_time)
   end
 end
