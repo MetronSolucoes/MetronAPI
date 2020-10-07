@@ -15,7 +15,7 @@ class OpeningHour < ApplicationRecord
 
   def oppening_range
     oppening_hour = opening_time.hour
-    oppening_minutes opening_time.min
+    oppening_minutes = opening_time.min
 
     close_hour = closing_time.hour
     close_minutes = closing_time.min
