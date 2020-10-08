@@ -37,27 +37,6 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
     end
   end
 
-  # Tratar esta lógica em um serviço próprio
-  def available_times
-    initial_check = params[:initial_check].to_datetime
-    final_check = params[:final_check].to_datetime
-    schedulings = Scheduling.not_canceled.where("(start > ? AND start < ?) OR (finish > ? AND finish < ?)", initial_check, final_check, initial_check, final_check)
-
-    available_times = []
-    schedulings.each do |scheduling|
-      if initial_check > scheduling.start
-        available_times.push({ initial: scheduling.finish, final: final_check })
-      elsif final_check <  scheduling.finish
-        available_times.push({ initial: initial_check, final: scheduling.start })
-      else
-        available_times.push({ initial: initial_check, final: scheduling.start })
-        available_times.push({ initial: scheduling.finish, final: final_check })
-      end
-    end
-
-    render json: available_times, status: :ok
-  end
-
   private
 
   def set_scheduling
