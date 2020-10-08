@@ -16,12 +16,12 @@ module Api::V1::SchedulingManager
     def available_time?
       define_service_execution_range
 
-      oppening_hours = OpeningHour.find_by(weekday: execution_start.wday,
+      opening_hours = OpeningHour.find_by(weekday: execution_start.wday,
                                            company_id: Company.first)
 
-      raise CustomException.new('O estabelecimento não funciona no dia em questão') if oppening_hours.blank?
+      raise CustomException.new('O estabelecimento não funciona no dia em questão') if opening_hours.blank?
 
-      unless in_oppening_range?(oppening_hours)
+      unless in_opening_range?(opening_hours)
         raise CustomException.new('O estabelecimento não funciona no horário em questão')
       end
 
@@ -45,16 +45,16 @@ module Api::V1::SchedulingManager
       @execution_end = execution_start + (service.duration).minutes
     end
 
-    def in_oppening_range?(oppening_hours)
+    def in_opening_range?(opening_hours)
       start_hour = "#{execution_start.hour}.#{execution_start.min}".to_f
       end_hour = "#{execution_end.hour}.#{execution_end.min}".to_f
 
-      oppening_hours.oppening_range === start_hour && oppening_hours.oppening_range === end_hour
+      opening_hours.opening_range === start_hour && opening_hours.opening_range === end_hour
     end
 
 
     def suggest_time
-      suggest_next_day unless next_day_is_weekend?
+      suggest_next_day
       suggest_next_week
     end
 
@@ -67,10 +67,6 @@ module Api::V1::SchedulingManager
       end
 
       raise CustomException.new("O horário desejado não está disponível no dia em questão, porém o mesmo horário está disponível no dia #{params[:date].strftime('%d/%m/%Y')}")
-    end
-
-    def next_day_is_weekend?
-      (execution_start + 1.day).on_weekend?
     end
 
     def suggest_next_week
