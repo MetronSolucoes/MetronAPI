@@ -4,6 +4,7 @@ class Employe < ApplicationRecord
 
   belongs_to :company
   has_many :employe_services
+  has_many :schedulings
 
   validates_presence_of :name, :last_name
   validates_length_of :phone, minimum: 8, maximum: 20, allow_blank: false

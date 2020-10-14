@@ -8,18 +8,24 @@ module Api::V1::SchedulingManager
       @params = params
       @service = Service.find_by!(id: params[:service_id])
       @customer = Customer.find_by!(id: params[:customer_id])
+      @employe = Employe.find_by!(id: params[:employe_id])
     end
 
     def execute_creation
       return suggest_time if !available_time?
-      Scheduling.create!(service: @service, start: execution_start, finish: execution_end, customer: @customer)
+      Scheduling.create!(service: @service,
+                         start: execution_start,
+                         finish: execution_end,
+                         scheduling_status_id: SchedulingStatus::SCHEDULED,
+                         customer: @customer,
+                         employe: @employe)
     end
 
     def available_time?
       define_service_execution_range
 
       opening_hours = OpeningHour.find_by(weekday: execution_start.wday,
-                                           company_id: Company.first)
+                                          company_id: Company.first)
 
       raise CustomException.new('O estabelecimento não funciona no dia em questão') if opening_hours.blank?
 
@@ -27,11 +33,13 @@ module Api::V1::SchedulingManager
         raise CustomException.new('O estabelecimento não funciona no horário em questão')
       end
 
-      schedulings = Scheduling.not_canceled.where("(start >= ? AND start <= ?) OR (finish >= ? AND finish <= ?)",
+      schedulings = Scheduling.not_canceled.where("((start >= ? AND start <= ?) OR (finish >= ? AND finish <= ?)) AND employe_id = ? AND scheduling_status_id != ?",
                                                   execution_start,
                                                   execution_end,
                                                   execution_start,
-                                                  execution_end)
+                                                  execution_end,
+                                                  @employe.id,
+                                                  SchedulingStatus::CANCELED)
 
       schedulings.blank?
     end
@@ -69,13 +77,18 @@ module Api::V1::SchedulingManager
       end
 
       suggestion_time
-      #raise CustomException.new("O horário desejado não está disponível no dia em questão, porém o mesmo horário está disponível no dia #{params[:date].strftime('%d/%m/%Y')}")
     end
 
     def suggestion_time
       {
         tag: :suggestion,
-        suggestion_day: params[:date].strftime('%d/%m/%Y') 
+        suggestion_day: params[:date].strftime('%d/%m/%Y'),
+        original_params: {
+          customer_id: params[:customer_id],
+          employe_id: params[:employe_id],
+          service_id: params[:service_id],
+          start_time: params[:start_time]
+        }
       }
     end
 
@@ -83,7 +96,6 @@ module Api::V1::SchedulingManager
       params[:date] = execution_start + 7.days
       raise CustomException.new("O sistema não achou nenhum horário disponível") unless available_time?
       suggestion_time
-      #raise CustomException.new("O horário desejado não está disponível no dia em questão, porém o mesmo horário está disponível no dia #{params[:date].strftime('%d/%m/%Y')}")
     end
   end
 end
