@@ -3,6 +3,7 @@ class Scheduling < ApplicationRecord
   include SchedulingQuery
 
   belongs_to :customer
+  belongs_to :employe
   belongs_to :service
   belongs_to :scheduling_status
 

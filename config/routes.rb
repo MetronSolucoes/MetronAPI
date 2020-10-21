@@ -30,7 +30,7 @@ Rails.application.routes.draw do
 
       resources :services, only: [:index, :show]
       resources :customers, only: [:show, :update]
-      resources :schedulings, except: [:destroy]
+      resources :schedulings, only: [:show, :create, :destroy, :index]
 
       get 'schedulings/index/not_canceleds', to: 'schedulings#index_without_canceleds'
       put 'schedulings/cancel/:id', to: 'schedulings#cancel_scheduling'
