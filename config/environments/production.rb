@@ -10,7 +10,7 @@ Rails.application.configure do
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = true
   
-  config.action_dispatch.tld_length = 2
+  config.action_dispatch.tld_length = 3
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
