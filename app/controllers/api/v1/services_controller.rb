@@ -6,8 +6,8 @@ class Api::V1::ServicesController < Api::V1::ApplicationController
   end
 
   def show
-    service = Api::V1::ServiceManager::Shower.new(params[:id]).build
-    render json: service, serializer: Api::V1::ServiceSerializer, status: :ok
+    service = Api::V1::ServiceManager::Shower.new(params[:id], true).build
+    render json: service, status: :ok
   end
 
   private

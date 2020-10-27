@@ -3,7 +3,24 @@ module Api::V1::ServiceManager
     private
 
     def instance
-      Service.find_by!(id: id)
+      return Service.find_by!(id: id) unless bot_request
+
+      service = Service.find_by(id: id)
+
+      if service.blank?
+        return {
+          valid: false,
+          messages: [
+            {
+              text: 'O serviço escolhido não existe.'
+            }
+          ]
+        }
+      end
+
+      return {
+        valid: true
+      }
     end
   end
 end
