@@ -3,7 +3,7 @@ module Api::V1::ServiceManager
     private
 
     def instance
-      return Service.find_by!(id: id) unless bot_request
+      return Service.find_by!(id: id) unless @bot_request
 
       service = Service.find_by(id: id)
 
