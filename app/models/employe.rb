@@ -17,4 +17,8 @@ class Employe < ApplicationRecord
     self.phone = self.phone.to_s.gsub(/\D/, '')
   end
 
+  def full_name
+    "#{name} #{last_name}"
+  end
+
 end

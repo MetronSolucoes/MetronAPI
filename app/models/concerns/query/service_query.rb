@@ -21,7 +21,7 @@ module ServiceQuery
     def format_order(order = '')
       return order if order.present?
 
-      ['id DESC NULLS LAST']
+      ['id ASC NULLS LAST']
     end
   end
 end

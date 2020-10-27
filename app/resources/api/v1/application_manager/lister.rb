@@ -23,9 +23,10 @@ module Api::V1::ApplicationManager
       @per_page = DEFAULT_PER_PAGE if @per_page.zero?
     end
 
-    def initialize(page, per_page, filters = {})
+    def initialize(page, per_page, bot_request = false, filters = {})
       self.page = page
       self.per_page = per_page
+      @bot_request = bot_request
       @filters = filters
     end
   end

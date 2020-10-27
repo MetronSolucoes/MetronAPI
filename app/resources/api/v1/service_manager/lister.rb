@@ -8,7 +8,9 @@ module Api::V1::ServiceManager
     def filter
       services = Service.__search(@filters)
 
-      @services_message = "Os serviços disponíveis são: \n"
+      return services unless @bot_request
+
+      @services_message = "Os serviços disponíveis são: \n\n"
 
       services.map do |service|
         services_message << "#{service.id} - #{service.name} \n"

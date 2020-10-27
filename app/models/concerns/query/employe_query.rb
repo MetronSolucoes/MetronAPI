@@ -16,14 +16,15 @@ module EmployeQuery
         last_name_cont: params.dig(:last_name),
         phone_eq: params.dig(:phone),
         email_eq: params.dig(:email),
-        company_id_eq: params.dig(:company_id)
+        company_id_eq: params.dig(:company_id),
+        employe_services_service_id_eq: params.dig(:service_id)
       }
     end
 
     def format_order(order = '')
       return order if order.present?
 
-      ['id DESC NULLS LAST']
+      ['id ASC NULLS LAST']
     end
   end
 end
