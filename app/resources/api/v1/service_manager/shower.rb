@@ -9,33 +9,21 @@ module Api::V1::ServiceManager
 
       if service.blank?
         return {
+          set_attributes: {
+            service_valid: false
+          },
           messages: [
             {
               text: 'O serviço escolhido não existe.',
-              quick_replies: [
-                {
-                  set_attributes: {
-                    service_valid: false
-                  }
-                }
-              ]
             }
           ]
         }
       end
 
       return {
-        messages: [
-          {
-            quick_replies: [
-              {
-                set_attributes: {
-                  service_valid: true
-                }
-              }
-            ]
-          }
-        ]
+        set_attributes: {
+          service_valid: true
+        }
       }
     end
   end
