@@ -32,8 +32,19 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
 
     render json: {
       set_attributes: {
-        date_valid: true
+        date_valid: true,
+        weekday: @date.wday
       }
+    }
+  end
+
+  def oppening_hours
+    render json: {
+      messages: [
+        {
+          text: "Selecione o horário no qual deseja fazer o serviço, informe no formato HH:MM, este estabelicmento funciona nos seguintes horários: #{Company.first.opening_hour(params[:weekday])}"
+        }
+      ]
     }
   end
 
@@ -46,7 +57,7 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
       },
       messages: [
         {
-          text: "A data informada não é valida, por favor tente novamente!"
+          text: "A data informada está mal formatada ou o estabelicmento não abre no dia em questão, por favor tente novamente!"
         }
       ]
     }
@@ -72,7 +83,10 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
     return false unless (01..12).include?(month)
     return false unless (2020..2100).include?(year)
 
-    date = Date.new(year, month, day)
+    @date = Date.new(year, month, day)
+
+    return false if OpeningHour.find_by(company_id: Company.first.id,
+                                        weekday: date.wday).blank?
 
     return false if date.end_of_day.past?
 
