@@ -88,7 +88,7 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
     return false if OpeningHour.find_by(company_id: Company.first.id,
                                         weekday: @date.wday).blank?
 
-    return false if date.end_of_day.past?
+    return false if @date.end_of_day.past?
 
     true
   end
