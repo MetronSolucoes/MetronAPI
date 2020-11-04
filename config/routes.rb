@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       get 'employes/:id', to: 'employes#show'
 
       get 'schedulings/index/not_canceleds', to: 'schedulings#index_without_canceleds'
+      post  'schedulings/date_validate', to: 'schedulings#date_validate'
       put 'schedulings/cancel/:id', to: 'schedulings#cancel_scheduling'
       post 'schedulings/available_times', to: 'schedulings#available_times'
     end

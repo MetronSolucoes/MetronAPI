@@ -25,10 +25,65 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
     render json: scheduling.destroy, status: :ok
   end
 
+  def date_validate
+    scheduling_date = params[:scheduling_date]
+    return invalid_date_error if scheduling_date.blank?
+    return invalid_date_error unless date_valid?(scheduling_date)
+
+    render json: {
+      set_attributes: {
+        date_valid: true
+      }
+    }
+  end
+
   private
 
-  def scheduling_params
-    params.require(:scheduling).permit(:customer_id, :service_id, :employe_id,
-                                       :scheduling_status_id, :date, :start_time)
+  def invalid_date_error
+    render json: {
+      set_attributes: {
+        date_valid: false
+      },
+      messages: [
+        {
+          text: "A data informada não é valida, por favor tente novamente!"
+        }
+      ]
+    }
+  end
+
+  def date_valid?(scheduling_date)
+    date_valid = true
+    splited_date = scheduling_date.delete(' ').split('/')
+
+    splited_date.map do |d|
+      next if d.scan(/\D/).empty?
+
+      date_valid = false
+    end
+
+    return date_valid unless date_valid
+
+    day = splited_date[0].try(:to_i)
+    month = splited_date[1].try(:to_i)
+    year = splited_date[2].try(:to_i)
+
+    return false unless (01..31).include?(day)
+    return false unless (01..12).include?(month)
+    return false unless (2020..2100).include?(year)
+
+    date = Date.new(year, month, day)
+
+    return false if date.end_of_day.past?
+
+    true
+  end
+
+  def have
+
+    def scheduling_params
+      params.require(:scheduling).permit(:customer_id, :service_id, :employe_id,
+                                         :scheduling_status_id, :date, :start_time)
+    end
   end
 end
