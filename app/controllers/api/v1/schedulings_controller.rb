@@ -86,7 +86,7 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
     @date = Date.new(year, month, day)
 
     return false if OpeningHour.find_by(company_id: Company.first.id,
-                                        weekday: date.wday).blank?
+                                        weekday: @date.wday).blank?
 
     return false if date.end_of_day.past?
 
