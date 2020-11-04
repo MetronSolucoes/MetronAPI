@@ -7,8 +7,8 @@ class Company < ApplicationRecord
   validates_length_of :phone, minimum: 8, maximum: 20, allow_blank: false
 
   def opening_hour(weekday)
-    opening_hours.find_by(weekday: weekday)
+    oh = opening_hours.find_by(weekday: weekday.to_i)
 
-    "das #{opening_hours.try(:opening_time).try(:stftime, '%H:%M')} até as #{opening_hours.try(:closing_time).try(:strftime, '%H:%M')}"
+    "das #{oh.try(:opening_time).try(:strftime, '%H:%M')} até as #{oh.try(:closing_time).try(:strftime, '%H:%M')}"
   end
 end

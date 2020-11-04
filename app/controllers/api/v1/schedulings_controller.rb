@@ -38,7 +38,7 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
     }
   end
 
-  def oppening_hours
+  def opening_hour
     render json: {
       messages: [
         {
