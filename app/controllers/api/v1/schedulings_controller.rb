@@ -38,6 +38,10 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
     }
   end
 
+  def validate_time
+
+  end
+
   def opening_hour
     render json: {
       messages: [
@@ -93,11 +97,8 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
     true
   end
 
-  def have
-
-    def scheduling_params
-      params.require(:scheduling).permit(:customer_id, :service_id, :employe_id,
-                                         :scheduling_status_id, :date, :start_time)
-    end
+  def scheduling_params
+    params.require(:scheduling).permit(:customer_id, :service_id, :employe_id,
+                                       :scheduling_status_id, :date, :start_time)
   end
 end

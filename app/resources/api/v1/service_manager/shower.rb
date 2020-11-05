@@ -5,7 +5,12 @@ module Api::V1::ServiceManager
     def instance
       return Service.find_by!(id: id) unless @bot_request
 
+      employes_ids = Company.first.employes.map(&:id)
+
       service = Service.find_by(id: id)
+
+      employes = EmployeService.where(service_id: id,
+                                      employe_id: employes_ids)
 
       if service.blank?
         return {
@@ -15,6 +20,19 @@ module Api::V1::ServiceManager
           messages: [
             {
               text: 'O serviço escolhido não existe.',
+            }
+          ]
+        }
+      end
+
+      if employes.blank?
+        return {
+          set_attributes: {
+            service_valid: false
+          },
+          messages: [
+            {
+              text: 'No momento não há nenhum funcionario especiliado no serviço em questão, por favor tente mais tarde ou selecione outro serviço!'
             }
           ]
         }
