@@ -16,7 +16,7 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
   end
 
   def create
-    scheduling = Api::V1::SchedulingManager::Creator.new(scheduling_params).create
+    scheduling = Api::V1::SchedulingManager::BotCreator.new(scheduling_params).create
     render json: scheduling, status: :created
   end
 
