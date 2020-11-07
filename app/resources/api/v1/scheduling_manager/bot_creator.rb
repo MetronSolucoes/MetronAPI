@@ -36,7 +36,7 @@ class Api::V1::SchedulingManager::BotCreator
         scheduled: false
       },
       messages: [
-        text: 'Falha ao criar o agendamento, por favor tente novamente mais tarde.'
+        text: "Falha ao criar o agendamento, por favor tente novamente mais tarde. #{scheduling.errors.full_messages}"
       ]
     }
   end
