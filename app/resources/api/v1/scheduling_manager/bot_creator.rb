@@ -1,4 +1,4 @@
-class Api::V1::ServiceManager::BotCreator
+class Api::V1::SchedulingManager::BotCreator
   attr_accessor :params, :service, :employe, :customer, :execution_start, :execution_end
 
   def initialize(params)
@@ -67,15 +67,18 @@ class Api::V1::ServiceManager::BotCreator
   end
 
   def suggest_time
-    suggest_next_day
-    suggest_next_week
+    suggestion = suggest_next_day
+    suggestion ||= suggest_next_week
+    suggestion
   end
 
   def suggest_next_day
     params[:date] = execution_start + 1.day
+    define_service_execution_range
 
     unless available_time?
       params[:date] = execution_start - 1.day
+      define_service_execution_range
       return
     end
 
@@ -84,7 +87,12 @@ class Api::V1::ServiceManager::BotCreator
 
   def suggest_next_week
     params[:date] = execution_start + 7.days
-    return no_time_available_error unless available_time?
+    define_service_execution_range
+
+    unless available_time?
+      define_service_execution_range
+      return no_time_available_error
+    end
 
     suggestion_time
   end
