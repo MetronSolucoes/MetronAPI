@@ -1,8 +1,8 @@
 class Api::V1::SchedulingsController < Api::V1::ApplicationController
 
   def index
-    schedulings = Api::V1::SchedulingManager::Lister.new(0, 0, params).build
-    render json: schedulings, meta: pagination(schedulings), each_serializer: Api::V1::SchedulingSerializer, status: :ok
+    schedulings = Api::V1::SchedulingManager::Lister.new(0, 0, true, params).build
+    render json: schedulings, status: :ok
   end
 
   #  def index_without_canceleds
