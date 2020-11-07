@@ -64,7 +64,7 @@ class Api::V1::ValidatorManager::Time
   def success_response
     {
       set_attributes: {
-        date_valid: true
+        time_valid: true
       }
     }
   end

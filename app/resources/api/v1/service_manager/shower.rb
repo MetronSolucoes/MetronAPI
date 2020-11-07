@@ -32,7 +32,7 @@ module Api::V1::ServiceManager
           },
           messages: [
             {
-              text: 'No momento não há nenhum funcionario especiliado no serviço em questão, por favor tente mais tarde ou selecione outro serviço!'
+              text: 'No momento não há nenhum funcionario especilizado no serviço em questão, por favor tente mais tarde ou selecione outro serviço!'
             }
           ]
         }
