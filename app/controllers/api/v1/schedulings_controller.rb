@@ -11,7 +11,7 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
   #end
 
   def show
-    scheduling = Api::V1::SchedulingManager::Shower.new(params[:id], true).build
+    scheduling = Api::V1::SchedulingManager::Shower.new(params[:id], true, params).build
     render json: scheduling, status: :ok
   end
 

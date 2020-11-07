@@ -5,7 +5,7 @@ class Api::V1::EmployesController < Api::V1::ApplicationController
   end
 
   def show
-    employe = Api::V1::EmployeManager::Shower.new(params[:id], true, params[:service_id]).build
+    employe = Api::V1::EmployeManager::Shower.new(params[:id], true, params).build
     render json: employe, status: :ok
   end
 end
