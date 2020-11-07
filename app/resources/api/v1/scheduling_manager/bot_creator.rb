@@ -56,7 +56,7 @@ class Api::V1::SchedulingManager::BotCreator
 
   def available_time?
     opening_hours = OpeningHour.find_by(weekday: execution_start.wday,
-                                        company_id: company.id)
+                                        company_id: Company.first.id)
 
     return false if opening_hours.blank?
 
