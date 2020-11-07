@@ -7,7 +7,9 @@ module Api::V1::EmployeManager
 
       employe = Employe.find_by(id: id)
 
-      if employe.blank?
+      employe_service = EmployeService.find_by(employe_id: employe.id, service_id: @service_id)
+
+      if employe.blank? || employe_service.blank?
         return {
           set_attributes: {
             employe_valid: false
@@ -20,7 +22,7 @@ module Api::V1::EmployeManager
         }
       end
 
-      return {
+      {
         set_attributes: {
           employe_valid: true
         }
