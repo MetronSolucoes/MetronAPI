@@ -55,6 +55,11 @@ class Api::V1::SchedulingManager::BotCreator
   end
 
   def available_time?
+    opening_hours = OpeningHour.find_by(weekday: execution_start.wday,
+                                        company_id: company.id)
+
+    return false if opening_hours.blank?
+
     schedulings = Scheduling.not_canceled.where("((start >= ? AND start <= ?) OR (finish >= ? AND finish <= ?)) AND employe_id = ? AND scheduling_status_id != ?",
                                                 execution_start,
                                                 execution_end,

@@ -21,13 +21,13 @@ module Api::V1::SchedulingManager
             text: 'Detalhes do agendamento'
           },
           {
-            text: "Data e Hora: #{scheguling.start.strftime('%d/%m/%Y %H:%M')}"
+            text: "Data e Hora: #{scheguling.start.strftime('dia %d/%m/%Y às %H:%M')}"
           },
           {
             text: "Serviço: #{scheguling.service.name}"
           },
           {
-            text: "Funcionário: #{scheguling.employe.name} #{scheguling.employe.last_name}"
+            text: "Prestador de serviços: #{scheguling.employe.name} #{scheguling.employe.last_name}"
           },
           {
             text: "Status: #{scheguling.status_label}"
