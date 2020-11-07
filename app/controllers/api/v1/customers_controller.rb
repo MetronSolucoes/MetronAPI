@@ -6,16 +6,15 @@ class Api::V1::CustomersController < Api::V1::ApplicationController
   end
 
   def create
-    customer = Customer.find_or_initialize_by(name: params[:first_name],
-                                              last_name: params[:last_name])
+    customer = Customer.find_or_initialize_by(name: params['first name'],
+                                              last_name: params['last_name'])
 
     customer.save(validate: false)
 
     render json: {
       set_attributes: {
         customer_id: customer.try(:id)
-      },
-      params: params
+      }
     }
   end
 
