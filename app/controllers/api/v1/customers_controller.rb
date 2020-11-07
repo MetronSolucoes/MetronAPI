@@ -14,7 +14,8 @@ class Api::V1::CustomersController < Api::V1::ApplicationController
     render json: {
       set_attributes: {
         customer_id: customer.try(:id)
-      }
+      },
+      params: params
     }
   end
 
