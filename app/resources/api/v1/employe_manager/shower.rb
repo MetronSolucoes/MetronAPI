@@ -7,7 +7,7 @@ module Api::V1::EmployeManager
 
       employe = Employe.find_by(id: id)
 
-      employe_service = EmployeService.find_by(employe_id: employe.id, service_id: @service_id)
+      employe_service = EmployeService.find_by(employe_id: employe.id, service_id: @params[:service_id])
 
       if employe.blank? || employe_service.blank?
         return {

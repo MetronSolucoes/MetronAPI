@@ -13,6 +13,9 @@ module Api::V1::SchedulingManager
       end
 
       {
+        set_attributes: {
+          empty: schedulings.blank?
+        },
         messages: [
           {
             text: schedulings_message

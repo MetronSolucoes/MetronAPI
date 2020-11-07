@@ -5,7 +5,7 @@ module Api::V1::SchedulingManager
     def instance
       return Scheduling.find_by!(id: id) unless @bot_request
 
-      scheguling = Scheduling.find_by(id: id)
+      scheguling = Scheduling.find_by(id: id, customer_id: @params[:customer_id])
 
       if scheguling.blank?
         return {

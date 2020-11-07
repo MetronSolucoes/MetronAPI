@@ -12,10 +12,10 @@ module Api::V1::ApplicationManager
       raise NotImplementedError
     end
 
-    def initialize(id, bot_request = false, service_id = nil)
+    def initialize(id, bot_request = false, params = nil)
       @id = id
       @bot_request = bot_request
-      @service_id = service_id
+      @params = params
     end
   end
 end
