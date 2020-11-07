@@ -11,8 +11,8 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
   #end
 
   def show
-    scheduling = Api::V1::SchedulingManager::Shower.new(params[:id]).build
-    render json: scheduling, serializer: Api::V1::SchedulingSerializer, status: :ok
+    scheduling = Api::V1::SchedulingManager::Shower.new(params[:id], true).build
+    render json: scheduling, status: :ok
   end
 
   def create

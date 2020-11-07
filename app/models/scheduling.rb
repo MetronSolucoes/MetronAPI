@@ -25,4 +25,12 @@ class Scheduling < ApplicationRecord
 
     false
   end
+
+  def status_label
+    if scheduling_status_id == SchedulingStatus::SCHEDULED
+      return 'Agendado'
+    end
+
+    'Cancelado'
+  end
 end

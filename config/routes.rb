@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       end
 
       resources :services, only: [:index, :show]
-      resources :customers, only: [:show, :update]
+      resources :customers, only: [:show, :update, :create]
       resources :schedulings, only: [:show, :create, :destroy, :index]
 
       get 'employes', to: 'employes#index'

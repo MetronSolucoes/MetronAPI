@@ -5,12 +5,18 @@ class Api::V1::CustomersController < Api::V1::ApplicationController
     render json: shower.build, serializer: Api::V1::CustomerSerializer, status: :ok
   end
 
-  #  def create
-  #    creator = Api::V1::CustomerManager::Creator.new(params[:name], params[:last_name],
-  #                                                    params[:cpf], params[:phone],
-  #                                                    params[:email])
-  #    render json: creator.create, serializer: Api::V1::CustomerSerializer, status: :created
-  #  end
+  def create
+    customer = Customer.find_or_initialize_by(name: params[:first_name],
+                                              last_name: params[:last_name])
+
+    customer.save(validate: false)
+
+    render json: {
+      set_attributes: {
+        customer_id: customer.try(:id)
+      }
+    }
+  end
 
   def update
     updater = Api::V1::CustomerManager::Updater.new(params[:id], params.permit(:name, :last_name, :cpf, :phone, :email))
