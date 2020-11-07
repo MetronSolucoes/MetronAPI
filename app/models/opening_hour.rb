@@ -18,7 +18,8 @@ class OpeningHour < ApplicationRecord
     opening_minutes = opening_time.min
 
     close_hour = closing_time.hour
-    close_minutes = closing_time.min
+    # 10 minutos a mais para o tempo de fechamento
+    close_minutes = (closing_time + 10.minutes).min
 
     opening_float = "#{opening_hour}.#{opening_minutes}".to_f
     close_float = "#{close_hour}.#{close_minutes}".to_f

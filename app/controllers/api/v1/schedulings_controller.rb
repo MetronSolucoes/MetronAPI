@@ -26,20 +26,13 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
   end
 
   def date_validate
-    scheduling_date = params[:scheduling_date]
-    return invalid_date_error if scheduling_date.blank?
-    return invalid_date_error unless date_valid?(scheduling_date)
-
-    render json: {
-      set_attributes: {
-        date_valid: true,
-        weekday: @date.wday
-      }
-    }
+    render json: Api::V1::ValidatorManager::Date.new(params[:scheduling_date]).execute, status: :ok
   end
 
-  def validate_time
-
+  def time_validate
+    render json: Api::V1::ValidatorManager::Time.new(params[:scheduling_time],
+                                                     params[:scheduling_date],
+                                                     params[:service_id]).execute, status: :ok
   end
 
   def opening_hour
@@ -53,49 +46,6 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
   end
 
   private
-
-  def invalid_date_error
-    render json: {
-      set_attributes: {
-        date_valid: false
-      },
-      messages: [
-        {
-          text: "A data informada está mal formatada ou o estabelicmento não abre no dia em questão, por favor tente novamente!"
-        }
-      ]
-    }
-  end
-
-  def date_valid?(scheduling_date)
-    date_valid = true
-    splited_date = scheduling_date.delete(' ').split('/')
-
-    splited_date.map do |d|
-      next if d.scan(/\D/).empty?
-
-      date_valid = false
-    end
-
-    return date_valid unless date_valid
-
-    day = splited_date[0].try(:to_i)
-    month = splited_date[1].try(:to_i)
-    year = splited_date[2].try(:to_i)
-
-    return false unless (01..31).include?(day)
-    return false unless (01..12).include?(month)
-    return false unless (2020..2100).include?(year)
-
-    @date = Date.new(year, month, day)
-
-    return false if OpeningHour.find_by(company_id: Company.first.id,
-                                        weekday: @date.wday).blank?
-
-    return false if @date.end_of_day.past?
-
-    true
-  end
 
   def scheduling_params
     params.require(:scheduling).permit(:customer_id, :service_id, :employe_id,
