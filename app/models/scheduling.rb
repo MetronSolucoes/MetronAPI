@@ -20,7 +20,7 @@ class Scheduling < ApplicationRecord
       where.not(id: self.id, scheduling_status_id: SchedulingStatus::CANCELED).present?
     return true if Scheduling.where(finish: self.start..self.finish, employe_id: self.employe_id).
       where.not(id: self.id, scheduling_status_id: SchedulingStatus::CANCELED).present?
-    return true if Scheduling.where("start < ? AND finish > ?", self.start, self.start, employe_id: self.employe_id).
+    return true if Scheduling.where("start < ? AND finish > ? AND employe_id = ?", self.start, self.start, self.employe_id).
       where.not(id: self.id, scheduling_status_id: SchedulingStatus::CANCELED).present?
 
     false
