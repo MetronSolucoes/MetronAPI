@@ -1,7 +1,7 @@
 class Api::V1::ServicesController < Api::V1::ApplicationController
 
   def index
-    services = Api::V1::ServiceManager::Lister.new(0, 0, true, params).build
+    services = Api::V1::ServiceManager::Lister.new(0, 0, params, true).build
     render json: services
   end
 

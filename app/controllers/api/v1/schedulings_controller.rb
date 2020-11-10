@@ -1,7 +1,7 @@
 class Api::V1::SchedulingsController < Api::V1::ApplicationController
 
   def index
-    schedulings = Api::V1::SchedulingManager::Lister.new(0, 0, true, params).build
+    schedulings = Api::V1::SchedulingManager::Lister.new(0, 0, params, true).build
     render json: schedulings, status: :ok
   end
 
