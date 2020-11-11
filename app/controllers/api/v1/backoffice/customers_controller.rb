@@ -18,7 +18,7 @@ class Api::V1::Backoffice::CustomersController < Api::V1::Backoffice::Applicatio
   end
 
   def create
-    creator = Api::V1::CustomerManager::Creator.new(params[:name], params[:last_name], params[:cpf], params[:phone], params[:email])
+    creator = Api::V1::CustomerManager::Creator.new(params[:customer][:name], params[:customer][:last_name], params[:customer][:cpf], params[:customer][:phone], params[:customer][:email])
     render json: creator.create, serializer: Api::V1::CustomerSerializer, status: :created
   end
 

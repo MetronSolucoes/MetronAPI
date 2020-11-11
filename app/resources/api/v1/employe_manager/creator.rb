@@ -9,6 +9,7 @@ module Api::V1::EmployeManager
     end
 
     def execute_creation
+      @params = @params.merge({ company_id: Company.first.id })
       validate_company!
       Employe.create!(params)
     end
