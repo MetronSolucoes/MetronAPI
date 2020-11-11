@@ -23,7 +23,7 @@ class Api::V1::Backoffice::CustomersController < Api::V1::Backoffice::Applicatio
   end
 
   def update
-    updater = Api::V1::CustomerManager::Updater.new(params[:id], params.permit(:name, :last_name, :cpf, :phone, :email))
+    updater = Api::V1::CustomerManager::Updater.new(params[:id], params.require(:customer).permit(:name, :last_name, :cpf, :phone, :email))
     render json: updater.update, serializer: Api::V1::CustomerSerializer, status: :ok
   end
 

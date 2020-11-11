@@ -25,7 +25,7 @@ class Api::V1::Backoffice::ServicesController < Api::V1::Backoffice::Application
     service = Api::V1::ServiceManager::Destroyer.new(params[:id])
 
     if service.destroy
-      render json_destroy_success('Serviço excluído com sucesso')
+      render json_success('Serviço excluído com sucesso')
     else
       render json_error('Falha ao excluir serviço')
     end
