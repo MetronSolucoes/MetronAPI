@@ -16,7 +16,7 @@ class Api::V1::Backoffice::UsersController < Api::V1::Backoffice::ApplicationCon
   end
 
   def update
-    user = Api::V1::UserManager::Updater.new(params[:id], permitted_params).update
+    user = Api::V1::UserManager::Updater.new(params[:id], params.fetch(:user).permit(:name, :email)).update
     render json: user, serializer: Api::V1::UserSerializer, status: :ok
   end
 

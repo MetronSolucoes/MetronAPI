@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   belongs_to :company, optional: true
 
-  validates :name, :email, :password, presence: true
+  validates :name, :email, presence: true
   validates :email, uniqueness: { case_sensitive: false }
   validates :email, format: /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\z/
 

@@ -58,6 +58,7 @@ class Api::V1::Backoffice::EmployesController < Api::V1::Backoffice::Application
   end
 
   def employe_params
+    puts params
     params.require(:employe).permit(:name, :last_name, :phone, :email, :company_id)
   end
 end

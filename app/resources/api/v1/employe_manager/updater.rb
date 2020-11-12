@@ -6,6 +6,7 @@ module Api::V1::EmployeManager
     def execute_update
       employe = find_employe
       validate_company
+      puts params
       employe.update!(params)
       employe
     end

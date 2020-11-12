@@ -1,4 +1,4 @@
-module Api::V1::EmployeManager
+module Api::V1::UserManager
   class Updater < Api::V1::ApplicationManager::Updater
 
     private

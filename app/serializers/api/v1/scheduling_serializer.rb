@@ -3,5 +3,6 @@ class Api::V1::SchedulingSerializer < ActiveModel::Serializer
 
   belongs_to :customer, serializer: Api::V1::CustomerSerializer
   belongs_to :service, serializer: Api::V1::ServiceSerializer
+  belongs_to :employe, serializer: Api::V1::EmployeSerializer
   belongs_to :scheduling_status
 end
