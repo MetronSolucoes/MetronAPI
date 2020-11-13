@@ -20,9 +20,11 @@ employe2 = Employe.find_or_create_by(name: 'Rafa', last_name: 'Couto', phone: '1
 employe3 = Employe.find_or_create_by(name: 'Giovani', last_name: 'Zaparoli', phone: '14970607070',
                                      email: 'giovani.zaparoli@barbearia.com', company_id: company.id)
 
-service = Service.find_or_create_by(name: 'Corte e barba', description: 'Corte e barba', duration: 30)
-service2 = Service.find_or_create_by(name: 'Tingimento', description: 'Pintura de cabelo', duration: 45)
-service3 = service = Service.find_or_create_by(name: 'Corte de maquina', description: 'Corte feito somente na maquina', duration: 30)
+service = Service.find_or_create_by(name: 'Corte e barba', description: 'Corte e barba', duration: 30, price: 35.00)
+service2 = Service.find_or_create_by(name: 'Tingimento', description: 'Pintura de cabelo', duration: 45, price: 45.00)
+service3 = service = Service.find_or_create_by(name: 'Corte de maquina', description: 'Corte feito somente na maquina',
+                                               duration: 30, price: 20.00)
+
 
 EmployeService.find_or_create_by(employe_id: employe.id, service_id: service.id)
 EmployeService.find_or_create_by(employe_id: employe.id, service_id: service2.id)

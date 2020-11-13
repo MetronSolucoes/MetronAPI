@@ -27,6 +27,9 @@ module Api::V1::SchedulingManager
             text: "Serviço: #{scheguling.service.name}"
           },
           {
+            text: "Preço: #{scheguling.service.price_currency}"
+          }
+          {
             text: "Prestador de serviços: #{scheguling.employe.name} #{scheguling.employe.last_name}"
           },
           {

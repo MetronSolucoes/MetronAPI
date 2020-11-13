@@ -39,7 +39,7 @@ class Api::V1::SchedulingsController < Api::V1::ApplicationController
     render json: {
       messages: [
         {
-          text: "Selecione o horário no qual deseja fazer o serviço, informe no formato HH:MM, este estabelicmento funciona nos seguintes horários: #{Company.first.opening_hour(params[:weekday])}"
+          text: "Selecione o horário no qual deseja fazer o serviço, este estabelecimento funciona nos seguintes horários: #{Company.first.opening_hour(params[:weekday])}"
         }
       ]
     }

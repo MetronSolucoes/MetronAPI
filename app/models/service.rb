@@ -1,8 +1,15 @@
 class Service < ApplicationRecord
   include ServiceQuery
+  include ActionView::Helpers::NumberHelper
 
   validates_uniqueness_of :name
   validate :validate_duration
+
+  def price_currency
+    return 'R$ 0,00' if price.blank?
+
+    number_to_currency(price, :unit => "R$ ", :separator => ",", :delimiter => ".")
+  end
 
   private
 

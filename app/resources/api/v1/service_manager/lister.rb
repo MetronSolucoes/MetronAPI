@@ -13,7 +13,7 @@ module Api::V1::ServiceManager
       @services_message = "Os serviços disponíveis são: \n\n"
 
       services.map do |service|
-        services_message << "#{service.id} - #{service.name}, duração: #{service.duration} minutos \n"
+        services_message << "#{service.id} - #{service.name}, duração: #{service.duration} minutos, preco: #{service.price_currency} \n"
       end
 
       mount_bot_response
