@@ -38,6 +38,6 @@ class Api::V1::Backoffice::ServicesController < Api::V1::Backoffice::Application
   end
 
   def service_params
-    params.require(:service).permit(:name, :description, :duration)
+    params.require(:service).permit(:name, :description, :duration, :price)
   end
 end
